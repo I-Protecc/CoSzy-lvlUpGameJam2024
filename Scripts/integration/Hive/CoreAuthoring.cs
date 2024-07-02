@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using GameJamPlaceHolderName.Scripts.domain;
 using Godot;
 
