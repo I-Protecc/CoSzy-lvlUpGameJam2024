@@ -20,8 +20,6 @@ public partial class CoreAuthoring : Node2D
 	public override void _Process(double delta)
 	{
 		if (Core.IsDead) QueueFree();
-		
-		
 	}
 
 	public void Damage(float damage)

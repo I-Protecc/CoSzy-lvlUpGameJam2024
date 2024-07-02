@@ -6,6 +6,7 @@
 
 [node name="Core" parent="." instance=ExtResource("1_wsq8x")]
 position = Vector2(-1, 0)
+Health = 100
 
 [node name="Camera2D" type="Camera2D" parent="."]
-process_callback = 0
+position = Vector2(0, 1)
