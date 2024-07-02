@@ -8,6 +8,7 @@ public partial class CoreAuthoring : Node2D
 {
 	[Export]
 	public int Health;
+
 	public Core Core { get; private set; }
 	
 	// Called when the node enters the scene tree for the first time.
