@@ -8,7 +8,7 @@ size = Vector2(99, 108)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jw2j2"]
 
-[node name="Core" type="Node2D"]
+[node name="Core" type="Node2D" groups=["Core"]]
 script = ExtResource("1_2rtqf")
 Health = 100
 

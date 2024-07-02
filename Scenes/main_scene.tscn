@@ -1,12 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://uahb53qeyxcg"]
+[gd_scene load_steps=4 format=3 uid="uid://uahb53qeyxcg"]
 
 [ext_resource type="PackedScene" uid="uid://dy5wkumqo4i13" path="res://Prefabs/core.tscn" id="1_wsq8x"]
+[ext_resource type="PackedScene" uid="uid://doflckyjkcl3s" path="res://Prefabs/worker.tscn" id="2_mjj12"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_33deb"]
+vertices = PackedVector2Array(-70, 0, 191, 100, 190, 100, 332, 175, 333, 390, 10, 475, -269, 492, -408, 253, -275, 36)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3, 4, 5, 6, 7, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-70, -11, -282, 27, -420, 253, -275, 503, 13, 485, 344, 399, 342, 169, 195, 91)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="MainScene" type="Node2D"]
 
 [node name="Core" parent="." instance=ExtResource("1_wsq8x")]
 position = Vector2(-1, 0)
-Health = 100
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 1)
+
+[node name="Worker" parent="." instance=ExtResource("2_mjj12")]
+position = Vector2(-108, -4)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(22, -254)
+navigation_polygon = SubResource("NavigationPolygon_33deb")

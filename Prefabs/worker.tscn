@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://doflckyjkcl3s"]
+
+[ext_resource type="Script" path="res://Scripts/integration/WorkerAuthoring.cs" id="1_0hcoq"]
+[ext_resource type="Script" path="res://Prefabs/UnitMovement.cs" id="2_cybdy"]
+[ext_resource type="Texture2D" uid="uid://dk1q7n6pk06oc" path="res://Sprites/WorkerPlaceHolder.png" id="2_lwgaq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgmwt"]
+size = Vector2(62, 62)
+
+[node name="Worker" type="Node2D" groups=["Workers"]]
+script = ExtResource("1_0hcoq")
+Health = 5
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(2, -2)
+motion_mode = 1
+script = ExtResource("2_cybdy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_sgmwt")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+
+[node name="WorkerPlaceHolder" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+texture = ExtResource("2_lwgaq")
