@@ -19,12 +19,12 @@ public class HealthPool
         return Health = Math.Clamp(Health + healthChange, _minHealth, _maxHealth);
     }
 
-    public float Damage(int damage)
+    public float DecreaseHealth(float damage)
     {
         return HealthClamp(-damage);
     }
 
-    public float Heal(int heal)
+    public float IncreaseHealth(float heal)
     {
         return HealthClamp(heal);
     }
