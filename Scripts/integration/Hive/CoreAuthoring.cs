@@ -1,19 +1,19 @@
 using System.ComponentModel.DataAnnotations;
 using GameJamPlaceHolderName.Scripts.domain;
-using GameJamPlaceHolderName.Scripts.integration.Definitions;
 using Godot;
 
 namespace GameJamPlaceHolderName.Scripts.integration.Hive;
 
-public partial class CoreAuthoring : Node
+public partial class CoreAuthoring : Node2D
 {
-	public CoreDefiniton CoreDefiniton;
+	[Export]
+	public int Health;
 	public Core Core { get; private set; }
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Core = new Core(CoreDefiniton.health);
+		Core = new Core(Health);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

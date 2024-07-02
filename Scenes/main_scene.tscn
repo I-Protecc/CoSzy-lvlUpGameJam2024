@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://uahb53qeyxcg"]
+
+[ext_resource type="PackedScene" uid="uid://dy5wkumqo4i13" path="res://Prefabs/core.tscn" id="1_wsq8x"]
+
+[node name="MainScene" type="Node2D"]
+
+[node name="Core" parent="." instance=ExtResource("1_wsq8x")]
+position = Vector2(-1, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
