@@ -10,6 +10,8 @@ public partial class DayNightManager : Node
     
     private DirectionalLight2D _sun;
     private Timer _timer;
+    
+    private float _t = 0.0f;
 
     public DayNightManager()
     {
@@ -23,6 +25,7 @@ public partial class DayNightManager : Node
         _timer.Timeout += OnTimerTimeout;
 
         _dayTimeEnum = DayTime.Day;
+        _sun.Energy = 1f;
     }
 
     public override void _Process(double delta)
@@ -39,6 +42,7 @@ public partial class DayNightManager : Node
             case DayTime.Day:
                 _timer.WaitTime = DawnDuskSeconds;
                 _dayTimeEnum = DayTime.Dusk;
+                _sun.Energy = 0.5f;
                 _timer.Start();
                 GD.Print("Switching from day to dusk");
                 
@@ -46,6 +50,7 @@ public partial class DayNightManager : Node
             case DayTime.Night:
                 _timer.WaitTime = DawnDuskSeconds;
                 _dayTimeEnum = DayTime.Dawn;
+                _sun.Energy = 0.5f;
                 _timer.Start();
                 GD.Print("Switching from night to dawn");
                 
@@ -53,6 +58,7 @@ public partial class DayNightManager : Node
             case DayTime.Dawn:
                 _timer.WaitTime = DayNightSeconds;
                 _dayTimeEnum = DayTime.Day;
+                _sun.Energy = 1f;
                 _timer.Start();
                 GD.Print("Switching from dawn to day");
                 
@@ -60,6 +66,7 @@ public partial class DayNightManager : Node
             case DayTime.Dusk:
                 _timer.WaitTime = DayNightSeconds;
                 _dayTimeEnum = DayTime.Night;
+                _sun.Energy = 0f;
                 _timer.Start();
                 GD.Print("Switching from dusk to night");
                 
