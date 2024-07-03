@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://shp3wpy3ehah"]
+
+[ext_resource type="Texture2D" uid="uid://cc3f2kiyep11d" path="res://Sprites/neutral_point_light.webp" id="1_spaen"]
+
+[node name="PointLight2D" type="PointLight2D"]
+position = Vector2(207, -37)
+color = Color(0.959984, 0.854337, 0.436938, 1)
+texture = ExtResource("1_spaen")
+texture_scale = 1.9
