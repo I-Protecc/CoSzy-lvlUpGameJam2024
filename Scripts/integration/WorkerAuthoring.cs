@@ -14,14 +14,18 @@ public partial class WorkerAuthoring : Node2D
     public bool Selected = false;
     
     public UnitMovement UnitMovement;
-
+    private CharacterBody2D _worker;
+    private Sprite2D _workerSprite;
+    
     public Worker Worker { get; private set; }
 	
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         Worker = new Worker(Health);
-        UnitMovement = GetNode<CharacterBody2D>("Body") as UnitMovement; 
+        UnitMovement = GetNode<CharacterBody2D>("Body") as UnitMovement;
+        _worker = GetNode<CharacterBody2D>("Body");
+        _workerSprite = _worker.GetNode<Sprite2D>("WorkerPlaceHolder");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,9 +44,15 @@ public partial class WorkerAuthoring : Node2D
         if (@event is InputEventMouseButton eventMouseButton)
         {
             if (eventMouseButton.ButtonIndex == MouseButton.Left && MouseInside)
+            {
                 Selected = true;
-            if (eventMouseButton.ButtonIndex == MouseButton.Left && !MouseInside)
+                ((ShaderMaterial)_workerSprite.Material).SetShaderParameter("outlined", true);
+            }
+            else if (eventMouseButton.ButtonIndex == MouseButton.Left && !MouseInside)
+            {
                 Selected = false;
+                ((ShaderMaterial)_workerSprite.Material).SetShaderParameter("outlined", false);
+            }
             
             if(eventMouseButton.ButtonIndex == MouseButton.Right && Selected)
                 UnitMovement.MovementTarget = GetGlobalMousePosition();
