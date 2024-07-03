@@ -15,7 +15,7 @@ public partial class UnitMovement : CharacterBody2D
 	public Vector2 MovementTarget
 	{
 		get { return _navigationAgent.TargetPosition; }
-		set { _navigationAgent.TargetPosition = new Vector2(value.X, 0f); }
+		set { _navigationAgent.TargetPosition = new Vector2(value.X, GlobalPosition.Y); }
 	}
 
 	public override void _Ready()
