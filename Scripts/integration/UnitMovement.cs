@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace GameJamPlaceHolderName.Prefabs;
@@ -49,9 +50,9 @@ public partial class UnitMovement : CharacterBody2D
 		await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
 		//MovementTarget = _movementTargetPosition;
 	}
-
-	public void Ficken()
+	
+	private void _on_body_input_event(Node viewport, InputEvent @event, int shapeIdx)
 	{
-		GD.Print("sex");
+		GD.Print("evented the event");
 	}
 }

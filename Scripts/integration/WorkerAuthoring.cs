@@ -1,3 +1,4 @@
+using System;
 using GameJamPlaceHolderName.Prefabs;
 using GameJamPlaceHolderName.Scripts.domain;
 using Godot;
@@ -17,7 +18,7 @@ public partial class WorkerAuthoring : Node2D
     public override void _Ready()
     {
         Worker = new Worker(Health);
-        UnitMovement = GetNode<CharacterBody2D>("Body") as UnitMovement;
+        UnitMovement = GetNode<CharacterBody2D>("Body") as UnitMovement; 
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

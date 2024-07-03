@@ -14,6 +14,7 @@ Health = 5
 [node name="Body" type="CharacterBody2D" parent="."]
 collision_layer = 2
 collision_mask = 2
+input_pickable = true
 motion_mode = 1
 script = ExtResource("2_qyx20")
 
@@ -24,3 +25,5 @@ shape = SubResource("RectangleShape2D_sgmwt")
 
 [node name="WorkerPlaceHolder" type="Sprite2D" parent="Body"]
 texture = ExtResource("2_lwgaq")
+
+[connection signal="input_event" from="Body" to="." method="_on_body_input_event"]
