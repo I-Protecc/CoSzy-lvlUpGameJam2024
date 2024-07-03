@@ -7,12 +7,11 @@ public partial class UnitMovement : CharacterBody2D
 	private NavigationAgent2D _navigationAgent;
 
 	private float _movementSpeed = 200.0f;
-	private Vector2 _movementTargetPosition = new(0f, 0f);
 
 	public Vector2 MovementTarget
 	{
 		get { return _navigationAgent.TargetPosition; }
-		set { _navigationAgent.TargetPosition = value; }
+		set { _navigationAgent.TargetPosition = new Vector2(value.X, 0f); }
 	}
 
 	public override void _Ready()
@@ -48,8 +47,11 @@ public partial class UnitMovement : CharacterBody2D
 	{
 		// Wait for the first physics frame so the NavigationServer can sync.
 		await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+		//MovementTarget = _movementTargetPosition;
+	}
 
-		// Now that the navigation map is no longer empty, set the movement target.
-		MovementTarget = _movementTargetPosition;
+	public void Ficken()
+	{
+		GD.Print("sex");
 	}
 }

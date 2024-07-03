@@ -11,14 +11,14 @@ size = Vector2(62, 62)
 script = ExtResource("1_0hcoq")
 Health = 5
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Body" type="CharacterBody2D" parent="."]
 motion_mode = 1
 script = ExtResource("2_qyx20")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("RectangleShape2D_sgmwt")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
 
-[node name="WorkerPlaceHolder" type="Sprite2D" parent="CharacterBody2D"]
+[node name="WorkerPlaceHolder" type="Sprite2D" parent="Body"]
 texture = ExtResource("2_lwgaq")
