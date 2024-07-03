@@ -1,16 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://uahb53qeyxcg"]
+[gd_scene load_steps=7 format=3 uid="uid://uahb53qeyxcg"]
 
 [ext_resource type="PackedScene" uid="uid://dy5wkumqo4i13" path="res://Prefabs/core.tscn" id="1_wsq8x"]
 [ext_resource type="Script" path="res://Scripts/integration/DayNightManager.cs" id="2_2tpls"]
 [ext_resource type="PackedScene" uid="uid://cqpejlpnlx78n" path="res://Prefabs/worker.tscn" id="2_mjj12"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j2w1w"]
 vertices = PackedVector2Array(570, -196, 570, 46, -565, 48, -569, -197)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-575, 59, 580, 56, 580, -206, -580, -208)])
 source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqmd3"]
+size = Vector2(0.997036, 0.968353)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -20,12 +23,6 @@ position = Vector2(-1, 0)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 1)
 
-[node name="Grass" type="Sprite2D" parent="."]
-modulate = Color(4.52429e-06, 0.724836, 0.0465275, 1)
-position = Vector2(1, 260)
-scale = Vector2(1154, 410.5)
-texture = SubResource("CanvasTexture_cdt8i")
-
 [node name="DayNightManager" type="Node" parent="."]
 script = ExtResource("2_2tpls")
 
@@ -34,6 +31,7 @@ energy = 0.0
 shadow_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="DayNightManager"]
+visible = false
 color = Color(0.204339, 0.149737, 0.152875, 1)
 
 [node name="Timer" type="Timer" parent="DayNightManager"]
@@ -42,12 +40,28 @@ one_shot = true
 autostart = true
 
 [node name="Worker" parent="." instance=ExtResource("2_mjj12")]
-position = Vector2(214, 23)
+position = Vector2(214, 21)
 
 [node name="Worker2" parent="." instance=ExtResource("2_mjj12")]
-position = Vector2(326, 23)
+position = Vector2(326, 21)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_j2w1w")
+
+[node name="grass" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+collision_priority = 50.475
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grass"]
+position = Vector2(-4.00002, 254)
+scale = Vector2(1155.43, 411.007)
+shape = SubResource("RectangleShape2D_vqmd3")
+
+[node name="Grass" type="Sprite2D" parent="grass"]
+modulate = Color(4.52429e-06, 0.724836, 0.0465275, 1)
+position = Vector2(1, 260)
+scale = Vector2(1154, 410.5)
+texture = SubResource("CanvasTexture_cdt8i")
 
 [connection signal="timeout" from="DayNightManager/Timer" to="DayNightManager" method="_on_timer_timeout"]
