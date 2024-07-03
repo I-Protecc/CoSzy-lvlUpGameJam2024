@@ -12,6 +12,8 @@ script = ExtResource("1_0hcoq")
 Health = 5
 
 [node name="Body" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("2_qyx20")
 
