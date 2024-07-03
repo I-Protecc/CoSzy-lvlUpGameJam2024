@@ -7,7 +7,7 @@
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5e2l3"]
 vertices = PackedVector2Array(2586, 18, -22, 21, -22, -26, 2586, -26)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 32, -32, -36, 2596, -36, 2596, 28)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 32, -32, -36, 7.46817, -36, 2596, -36, 2596, 28)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7qrq2"]

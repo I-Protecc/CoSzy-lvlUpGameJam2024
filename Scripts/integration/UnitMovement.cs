@@ -6,7 +6,7 @@ namespace GameJamPlaceHolderName.Prefabs;
 
 public partial class UnitMovement : CharacterBody2D
 {
-	private float _movementSpeed = 200.0f;
+	private float _movementSpeed = 500.0f;
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	
 	private WorkerAuthoring _worker;
@@ -45,13 +45,13 @@ public partial class UnitMovement : CharacterBody2D
 
 		if (!_navigationAgent.IsNavigationFinished())
 		{
-			direction = _navigationAgent.GetNextPathPosition() - GlobalPosition;
+			direction = _navigationAgent.GetNextPathPosition() - GlobalTransform.Origin;
 			direction = direction.Normalized();
 		}
 
 		velocity.X = direction.X * _movementSpeed;
 		Velocity = velocity;
-		MoveAndCollide(Velocity * (float)delta);
+		MoveAndSlide();
 	}
 
 	private async void ActorSetup()
