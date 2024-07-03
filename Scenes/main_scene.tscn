@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dy5wkumqo4i13" path="res://Prefabs/core.tscn" id="1_wsq8x"]
 [ext_resource type="Script" path="res://Scripts/integration/DayNightManager.cs" id="2_2tpls"]
-[ext_resource type="PackedScene" uid="uid://cqpejlpnlx78n" path="res://Prefabs/worker.tscn" id="2_mjj12"]
+[ext_resource type="PackedScene" path="res://Prefabs/worker.tscn" id="2_mjj12"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
 
