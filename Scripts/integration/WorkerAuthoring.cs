@@ -14,7 +14,7 @@ public partial class WorkerAuthoring : Node2D
     public bool Selected = false;
     
     public UnitMovement UnitMovement;
-    private CharacterBody2D _worker;
+    private RigidBody2D _worker;
     private Sprite2D _workerSprite;
     
     public Worker Worker { get; private set; }
@@ -23,8 +23,8 @@ public partial class WorkerAuthoring : Node2D
     public override void _Ready()
     {
         Worker = new Worker(Health);
-        UnitMovement = GetNode<CharacterBody2D>("Body") as UnitMovement;
-        _worker = GetNode<CharacterBody2D>("Body");
+        UnitMovement = GetNode<RigidBody2D>("Body") as UnitMovement;
+        _worker = GetNode<RigidBody2D>("Body");
         _workerSprite = _worker.GetNode<Sprite2D>("WorkerPlaceHolder");
     }
 

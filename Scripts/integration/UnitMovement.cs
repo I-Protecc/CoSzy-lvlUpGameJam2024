@@ -4,10 +4,11 @@ using Godot;
 
 namespace GameJamPlaceHolderName.Prefabs;
 
-public partial class UnitMovement : CharacterBody2D
+public partial class UnitMovement : RigidBody2D
 {
-	private float _movementSpeed = 500.0f;
+	private float _movementSpeed = 200.0f;
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	public Vector2 Velocity;
 	
 	private WorkerAuthoring _worker;
 	
@@ -39,9 +40,8 @@ public partial class UnitMovement : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		Vector2 velocity = Velocity;
 		Vector2 direction = Vector2.Zero;
-		velocity.Y += Gravity * (float)delta;
+		Velocity.Y += Gravity * (float)delta;
 
 		if (!_navigationAgent.IsNavigationFinished())
 		{
@@ -49,9 +49,7 @@ public partial class UnitMovement : CharacterBody2D
 			direction = direction.Normalized();
 		}
 
-		velocity.X = direction.X * _movementSpeed;
-		Velocity = velocity;
-		MoveAndSlide();
+		Velocity.X = direction.X * _movementSpeed;
 	}
 
 	private async void ActorSetup()
