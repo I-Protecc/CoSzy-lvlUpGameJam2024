@@ -26,4 +26,5 @@ shape = SubResource("RectangleShape2D_sgmwt")
 [node name="WorkerPlaceHolder" type="Sprite2D" parent="Body"]
 texture = ExtResource("2_lwgaq")
 
-[connection signal="input_event" from="Body" to="." method="_on_body_input_event"]
+[connection signal="mouse_entered" from="Body" to="Body" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Body" to="Body" method="_on_mouse_exited"]

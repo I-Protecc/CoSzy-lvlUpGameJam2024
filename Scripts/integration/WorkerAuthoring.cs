@@ -10,6 +10,9 @@ public partial class WorkerAuthoring : Node2D
     [Export]
     public int Health;
     
+    public bool MouseInside = false;
+    public bool Selected = false;
+    
     public UnitMovement UnitMovement;
 
     public Worker Worker { get; private set; }
@@ -35,6 +38,14 @@ public partial class WorkerAuthoring : Node2D
     public override void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseButton eventMouseButton)
-            UnitMovement.MovementTarget = GetGlobalMousePosition();
+        {
+            if (eventMouseButton.ButtonIndex == MouseButton.Left && MouseInside)
+                Selected = true;
+            if (eventMouseButton.ButtonIndex == MouseButton.Left && !MouseInside)
+                Selected = false;
+            
+            if(eventMouseButton.ButtonIndex == MouseButton.Right && Selected)
+                UnitMovement.MovementTarget = GetGlobalMousePosition();
+        }
     }
 }

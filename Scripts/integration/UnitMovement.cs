@@ -1,4 +1,5 @@
 using System;
+using GameJamPlaceHolderName.Scripts.integration;
 using Godot;
 
 namespace GameJamPlaceHolderName.Prefabs;
@@ -8,6 +9,8 @@ public partial class UnitMovement : CharacterBody2D
 	private NavigationAgent2D _navigationAgent;
 
 	private float _movementSpeed = 200.0f;
+
+	private WorkerAuthoring _worker;
 
 	public Vector2 MovementTarget
 	{
@@ -19,7 +22,11 @@ public partial class UnitMovement : CharacterBody2D
 	{
 		base._Ready();
 
+		this.MouseEntered += _onMouseEntered;
+		this.MouseExited += _onMouseExited;
+
 		_navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+		_worker = GetParent<Node2D>() as WorkerAuthoring;
 		
 		_navigationAgent.PathDesiredDistance = 4.0f;
 		_navigationAgent.TargetDesiredDistance = 2.0f;
@@ -50,9 +57,16 @@ public partial class UnitMovement : CharacterBody2D
 		await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
 		//MovementTarget = _movementTargetPosition;
 	}
-	
-	private void _on_body_input_event(Node viewport, InputEvent @event, int shapeIdx)
+
+	private void _onMouseEntered()
 	{
-		GD.Print("evented the event");
+		GD.Print("Hovering over worker I see");
+		_worker.MouseInside = true;
+	}
+	
+	private void _onMouseExited()
+	{
+		GD.Print("Stopped hovering over worker");
+		_worker.MouseInside = false;
 	}
 }
