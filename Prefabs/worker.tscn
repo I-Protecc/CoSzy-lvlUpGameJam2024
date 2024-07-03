@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqpejlpnlx78n"]
+[gd_scene load_steps=7 format=3 uid="uid://iu2ejwdji6q2"]
 
 [ext_resource type="Script" path="res://Scripts/integration/WorkerAuthoring.cs" id="1_0hcoq"]
-[ext_resource type="Texture2D" uid="uid://dk1q7n6pk06oc" path="res://Sprites/WorkerPlaceHolder.png" id="2_lwgaq"]
+[ext_resource type="Texture2D" path="res://Sprites/WorkerPlaceHolder.png" id="2_lwgaq"]
 [ext_resource type="Script" path="res://Scripts/integration/UnitMovement.cs" id="2_qyx20"]
 [ext_resource type="Shader" path="res://Shaders/outline.gdshader" id="3_dhyfj"]
 
