@@ -1,11 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqpejlpnlx78n"]
+[gd_scene load_steps=7 format=3 uid="uid://cqpejlpnlx78n"]
 
 [ext_resource type="Script" path="res://Scripts/integration/WorkerAuthoring.cs" id="1_0hcoq"]
 [ext_resource type="Texture2D" uid="uid://dk1q7n6pk06oc" path="res://Sprites/WorkerPlaceHolder.png" id="2_lwgaq"]
 [ext_resource type="Script" path="res://Scripts/integration/UnitMovement.cs" id="2_qyx20"]
+[ext_resource type="Shader" path="res://Shaders/outline.gdshader" id="3_dhyfj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sgmwt"]
 size = Vector2(62, 62)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t41ib"]
+shader = ExtResource("3_dhyfj")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 3.023
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
 
 [node name="Worker" type="Node2D" groups=["Workers"]]
 script = ExtResource("1_0hcoq")
@@ -24,6 +34,8 @@ shape = SubResource("RectangleShape2D_sgmwt")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
 
 [node name="WorkerPlaceHolder" type="Sprite2D" parent="Body"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_t41ib")
 texture = ExtResource("2_lwgaq")
 
 [connection signal="mouse_entered" from="Body" to="Body" method="_on_mouse_entered"]
