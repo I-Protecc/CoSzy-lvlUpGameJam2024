@@ -34,6 +34,7 @@ script = ExtResource("2_qyx20")
 shape = SubResource("RectangleShape2D_sgmwt")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
+avoidance_enabled = true
 
 [node name="WorkerPlaceHolder" type="Sprite2D" parent="Body"]
 texture_filter = 1
