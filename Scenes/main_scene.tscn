@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://uahb53qeyxcg"]
+[gd_scene load_steps=7 format=3 uid="uid://uahb53qeyxcg"]
 
 [ext_resource type="PackedScene" uid="uid://dy5wkumqo4i13" path="res://Prefabs/core.tscn" id="1_wsq8x"]
 [ext_resource type="Script" path="res://Scripts/integration/DayNightManager.cs" id="2_2tpls"]
-[ext_resource type="PackedScene" path="res://Prefabs/worker.tscn" id="2_mjj12"]
-[ext_resource type="Script" path="res://Scripts/application/MouseChecker.cs" id="4_28n7p"]
+[ext_resource type="PackedScene" uid="uid://iu2ejwdji6q2" path="res://Prefabs/worker.tscn" id="2_mjj12"]
+[ext_resource type="PackedScene" uid="uid://26s6wfd4oeua" path="res://Prefabs/Utility/MouseHoverCheck.tscn" id="4_m08ex"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
 
@@ -12,9 +12,6 @@ vertices = PackedVector2Array(570, -196, 570, 46, -565, 48, -569, -197)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-575, 59, 580, 56, 580, -206, -580, -208)])
 source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5st47"]
-size = Vector2(64, 64)
 
 [node name="MainScene" type="Node2D"]
 
@@ -54,14 +51,6 @@ position = Vector2(326, 23)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_j2w1w")
 
-[node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("4_28n7p")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-164, 22)
-shape = SubResource("RectangleShape2D_5st47")
-debug_color = Color(0.915661, 0.756649, 0, 0.905882)
+[node name="Area2D" parent="." instance=ExtResource("4_m08ex")]
 
 [connection signal="timeout" from="DayNightManager/Timer" to="DayNightManager" method="_on_timer_timeout"]
-[connection signal="mouse_entered" from="Area2D" to="Area2D" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="Area2D" method="_on_mouse_exited"]
