@@ -42,10 +42,6 @@ public partial class MouseChecker : Area2D
             {
                 Interacted = true;
             }
-            else if (eventMouseButton.ButtonIndex == MouseButton.Right && !MouseHovering)
-            {
-                Interacted = false;
-            }
         }
     }
 }

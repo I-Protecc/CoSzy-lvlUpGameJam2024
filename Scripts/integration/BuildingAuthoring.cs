@@ -36,6 +36,7 @@ public partial class BuildingAuthoring : Node2D
 
 		if (_mouseChecker.Interacted)
 		{
+			_mouseChecker.Interacted = false;
 			EmployWorker();
 		}
 	
@@ -66,9 +67,11 @@ public partial class BuildingAuthoring : Node2D
 	}
 	private void _OnAreaEntered(Area2D area)
     {
-	    if (area == _employedWorker.GetNode<Area2D>("InteractionArea"))
+	    GD.Print("Area was entered");
+	    if (area == _employedWorker.GetNode<Area2D>("Body/InteractionArea"))
 	    {
 		   StartWork(); 
+		   GD.Print("Now Work commences");
 	    }
 	    
 	    
@@ -76,9 +79,10 @@ public partial class BuildingAuthoring : Node2D
 
 	private void EmployWorker()
 	{
-		if (GameManager.GetSelectedWorker() is not null)
+		if (GameManager.Instance.GetSelectedWorker() is not null)
 		{
-			_employedWorker = GameManager.GetSelectedWorker();
+			_employedWorker = GameManager.Instance.GetSelectedWorker();
+			GD.Print("Worker Assigned");
 		}
 	}
 
