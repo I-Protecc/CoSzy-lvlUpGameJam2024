@@ -6,4 +6,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>GameJamPlaceHolderName</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Prefabs\" />
+  </ItemGroup>
 </Project>

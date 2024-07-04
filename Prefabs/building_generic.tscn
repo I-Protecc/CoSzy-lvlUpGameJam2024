@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://niaarae6fuq"]
+
+[ext_resource type="Script" path="res://Prefabs/BuildingAuthoring.cs" id="1_iyjvq"]
+[ext_resource type="Script" path="res://Scripts/application/MouseChecker.cs" id="2_7fohx"]
+[ext_resource type="Texture2D" uid="uid://d218fqpau6omk" path="res://Sprites/BuildingPlaceHolder.png" id="2_ka7s2"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_bm6ov"]
+script/source = "using Godot;
+using System;
+
+public partial class BuildingAuthoring : StaticBody2D
+{
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+}
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5cud"]
+size = Vector2(64, 64)
+
+[node name="BuildingGeneric" type="Node2D"]
+script = ExtResource("1_iyjvq")
+Health = 50
+
+[node name="Body" type="StaticBody2D" parent="."]
+script = SubResource("CSharpScript_bm6ov")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_x5cud")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="Body"]
+script = ExtResource("2_7fohx")
+
+[node name="BuildingPlaceHolder" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("2_ka7s2")
+
+[connection signal="mouse_entered" from="Body" to="." method="_on_body_mouse_entered"]
+[connection signal="mouse_exited" from="Body" to="." method="_on_body_mouse_exited"]
+[connection signal="mouse_entered" from="Body/Area2D" to="Body/Area2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Body/Area2D" to="Body/Area2D" method="_on_mouse_exited"]

@@ -17,8 +17,13 @@ public class Building
     {
         Health = _healthPool.DecreaseHealth(damage);
     }
+
+    public void Repair(float repairAmount)
+    {
+        Health = _healthPool.IncreaseHealth(repairAmount);
+    }
     
-    public void Kill()
+    public void Destroy()
     {
         Damage(Health);
     }
