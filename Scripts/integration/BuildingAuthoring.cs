@@ -10,16 +10,19 @@ public partial class BuildingAuthoring : Node2D
 	
 	private StaticBody2D _building; 
 	private Sprite2D _buildingSprite;
-	private MouseChecker _mouseChecker; 
-	
+	private MouseChecker _mouseChecker;
+	private Area2D _area2D;
 	public Building Building { get; private set; }
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Building = new Building(Health);
 		_building = GetNode<StaticBody2D>("Body");
-		_buildingSprite = _building.GetNode<Sprite2D>("BuildingPlaceHolder");
-		_mouseChecker= _building.GetNode<Area2D>("Area2D") as MouseChecker;
+		_buildingSprite = GetNode<Sprite2D>("Body/BuildingPlaceHolder");
+		_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
+
+		_area2D = GetNode<Area2D>("Body/Area2D");
+		_area2D.AreaEntered += _OnAreaEntered;
 
 	}
 
@@ -52,5 +55,11 @@ public partial class BuildingAuthoring : Node2D
 			//ShaderStuff
 		}
 	}
-	
+	private void _OnAreaEntered(Area2D area)
+    {
+    	// Replace with function body.
+    }
 }
+
+
+
