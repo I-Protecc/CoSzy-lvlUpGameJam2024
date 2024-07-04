@@ -60,13 +60,11 @@ public partial class UnitMovement : CharacterBody2D
 
 	private void _onMouseEntered()
 	{
-		GD.Print("Hovering over worker I see");
 		_worker.MouseInside = true;
 	}
 	
 	private void _onMouseExited()
 	{
-		GD.Print("Stopped hovering over worker");
 		_worker.MouseInside = false;
 	}
 }
