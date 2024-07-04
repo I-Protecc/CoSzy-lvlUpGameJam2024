@@ -28,11 +28,6 @@ public partial class DayNightManager : Node
         _sun.Energy = 1f;
     }
 
-    public override void _Process(double delta)
-    {
-        
-    }
-
     public override void _PhysicsProcess(double delta)
     {
         _t += (float)delta * 0.05f;
@@ -74,6 +69,7 @@ public partial class DayNightManager : Node
                 _dayTimeEnum = DayTime.Day;
                 _t = 0f;
                 _timer.Start();
+                GameManager.Instance.DaysPassed += 1;
                 GD.Print("Switching from dawn to day");
                 
                 break;
