@@ -12,6 +12,9 @@ public partial class BuildingAuthoring : Node2D
 	private Sprite2D _buildingSprite;
 	private MouseChecker _mouseChecker;
 	private Area2D _area2D;
+
+	private Node2D _employedWorker;
+	
 	public Building Building { get; private set; }
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -30,6 +33,12 @@ public partial class BuildingAuthoring : Node2D
 	public override void _Process(double delta)
 	{
 		if(Building.IsDestroyed) QueueFree();
+
+		if (_mouseChecker.Interacted)
+		{
+			EmployWorker();
+		}
+	
 		
 	}
 
@@ -57,8 +66,27 @@ public partial class BuildingAuthoring : Node2D
 	}
 	private void _OnAreaEntered(Area2D area)
     {
-    	// Replace with function body.
+	    if (area == _employedWorker.GetNode<Area2D>("InteractionArea"))
+	    {
+		   StartWork(); 
+	    }
+	    
+	    
     }
+
+	private void EmployWorker()
+	{
+		if (GameManager.GetSelectedWorker() is not null)
+		{
+			_employedWorker = GameManager.GetSelectedWorker();
+		}
+	}
+
+	private void StartWork()
+	{
+		
+	}
+	
 }
 
 
