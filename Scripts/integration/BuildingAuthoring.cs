@@ -1,8 +1,9 @@
-using Godot;
-using System;
 using GameJamPlaceHolderName.Scripts.domain;
+using Godot;
 
-public partial class BuildingAuthoring : StaticBody2D
+namespace GameJamPlaceHolderName.Scripts.integration;
+
+public partial class BuildingAuthoring : Node2D
 {
 	[Export]
 	public int Health;
@@ -17,8 +18,8 @@ public partial class BuildingAuthoring : StaticBody2D
 	{
 		Building = new Building(Health);
 		_building = GetNode<StaticBody2D>("Body");
-		_buildingSprite = GetNode<Sprite2D>("BuildingPlaceHolder");
-		_mouseChecker= GetNode<Area2D>("Area2D") as MouseChecker;
+		_buildingSprite = _building.GetNode<Sprite2D>("BuildingPlaceHolder");
+		_mouseChecker= _building.GetNode<Area2D>("Area2D") as MouseChecker;
 
 	}
 
