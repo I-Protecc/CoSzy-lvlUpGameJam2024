@@ -3,7 +3,8 @@ using System;
 
 public partial class MouseChecker : Area2D
 {
-    public bool Selected;
+    public bool Selected; // L Click
+    public bool Interacted; // R Click
     public bool MouseHovering { get; private set; }
     
     public override void _Ready()
@@ -35,6 +36,15 @@ public partial class MouseChecker : Area2D
             else if (eventMouseButton.ButtonIndex == MouseButton.Left && !MouseHovering)
             {
                 Selected = false;
+            }
+
+            if (eventMouseButton.ButtonIndex == MouseButton.Right && MouseHovering)
+            {
+                Interacted = true;
+            }
+            else if (eventMouseButton.ButtonIndex == MouseButton.Right && !MouseHovering)
+            {
+                Interacted = false;
             }
         }
     }
