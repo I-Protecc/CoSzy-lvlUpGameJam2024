@@ -46,11 +46,13 @@ public partial class WorkerAuthoring : Node2D
             if (eventMouseButton.ButtonIndex == MouseButton.Left && MouseInside)
             {
                 Selected = true;
+                GameManager.Instance.SetSelectedWorker(this);
                 ((ShaderMaterial)_workerSprite.Material).SetShaderParameter("outlined", true);
             }
             else if (eventMouseButton.ButtonIndex == MouseButton.Left && !MouseInside)
             {
                 Selected = false;
+                GameManager.Instance.UnsetSelectedWorker();
                 ((ShaderMaterial)_workerSprite.Material).SetShaderParameter("outlined", false);
             }
             
