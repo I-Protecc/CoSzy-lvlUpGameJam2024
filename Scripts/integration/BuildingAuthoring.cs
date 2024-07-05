@@ -102,7 +102,10 @@ public partial class BuildingAuthoring : Node2D
 		switch (WorkType)
 		{
 			case WorkType.Farm:
-				
+				GameManager.Instance.FarmsStartedWorking(1);
+				break;
+			case WorkType.Mine:
+				GameManager.Instance.MineStartedWorking(1);
 				break;
 			default:
 				GD.Print("No WorkType (Somehow)");
