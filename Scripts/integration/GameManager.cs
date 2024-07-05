@@ -28,6 +28,7 @@ public partial class GameManager : Node
 
     public Node2D GetSelectedWorker()
     {
+        if (SelectedWorker is null) return null;
         GD.Print("Getting " + SelectedWorker.Name);
         return SelectedWorker;
     }

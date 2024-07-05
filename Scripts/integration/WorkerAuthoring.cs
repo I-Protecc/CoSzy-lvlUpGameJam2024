@@ -65,6 +65,15 @@ public partial class WorkerAuthoring : Node2D
 
     public void SwitchWorkerState(bool newState)
     {
+        GD.Print("state switched to " + newState);
         SetProcess(newState);
+        if (newState == false)
+        {
+            Hide();
+        }
+        else
+        {
+            Show();
+        }
     }
 }
