@@ -1,6 +1,7 @@
-using Godot;
-using System;
 using GameJamPlaceHolderName.Scripts.domain.miscellaneous;
+using Godot;
+
+namespace GameJamPlaceHolderName.Scripts.integration;
 
 public partial class DayNightManager : Node
 {
@@ -61,6 +62,7 @@ public partial class DayNightManager : Node
                 _dayTimeEnum = DayTime.Dawn;
                 _t = 0f;
                 _timer.Start();
+                GameManager.Instance.NewCycle();
                 GD.Print("Switching from night to dawn");
                 
                 break;

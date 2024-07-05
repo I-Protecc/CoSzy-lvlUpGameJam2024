@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://uahb53qeyxcg"]
+[gd_scene load_steps=7 format=3 uid="uid://uahb53qeyxcg"]
 
 [ext_resource type="PackedScene" uid="uid://dy5wkumqo4i13" path="res://Prefabs/core.tscn" id="1_wsq8x"]
 [ext_resource type="PackedScene" uid="uid://iu2ejwdji6q2" path="res://Prefabs/worker.tscn" id="2_mjj12"]
 [ext_resource type="PackedScene" uid="uid://4wwb2h6ir8kt" path="res://Prefabs/day_night_manager.tscn" id="3_hvgot"]
+[ext_resource type="PackedScene" uid="uid://niaarae6fuq" path="res://Prefabs/building_generic.tscn" id="4_in45m"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
 
@@ -26,15 +27,21 @@ position = Vector2(1, 260)
 scale = Vector2(1154, 410.5)
 texture = SubResource("CanvasTexture_cdt8i")
 
-[node name="Worker" parent="." instance=ExtResource("2_mjj12")]
-position = Vector2(214, 23)
-
-[node name="Worker2" parent="." instance=ExtResource("2_mjj12")]
-position = Vector2(326, 23)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_j2w1w")
 
 [node name="GameManager" type="Node" parent="."]
 
 [node name="DayNightManager" parent="GameManager" instance=ExtResource("3_hvgot")]
+
+[node name="BuildingGeneric" parent="." instance=ExtResource("4_in45m")]
+position = Vector2(-315, 24)
+
+[node name="worker harrald" parent="." instance=ExtResource("2_mjj12")]
+position = Vector2(344, 24)
+
+[node name="Worker bernhart" parent="." instance=ExtResource("2_mjj12")]
+position = Vector2(166, 21)
+
+[node name="BuildingGeneric2" parent="." instance=ExtResource("4_in45m")]
+position = Vector2(-437, 23)
