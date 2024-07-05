@@ -43,7 +43,7 @@ public partial class WorkerAuthoring : Node2D
     
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseButton eventMouseButton)
+        if (@event is InputEventMouseButton eventMouseButton && @event.IsActionReleased("GeneralClick"))
         {
             if (eventMouseButton.ButtonIndex == MouseButton.Left && MouseInside)
             {

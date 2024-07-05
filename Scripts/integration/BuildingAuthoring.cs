@@ -88,12 +88,16 @@ public partial class BuildingAuthoring : Node2D
 	    if (!_isWorking)
 	    {
 		    GD.Print("Area was entered");
-		    if (area == _employedWorker.GetNode<Area2D>("Body/InteractionArea"))
+		    if (_employedWorker != null)
 		    {
-			    StartWork();
-			    OnWorkerArrived();
-			    GD.Print("Now Work commences");
+			    if (area == _employedWorker.GetNode<Area2D>("Body/InteractionArea"))
+			    {
+				    StartWork();
+				    OnWorkerArrived();
+				    GD.Print("Now Work commences");
+			    }
 		    }
+		    
 	    }
     }
 

@@ -27,7 +27,7 @@ public partial class MouseChecker : Area2D
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseButton eventMouseButton)
+        if (@event is InputEventMouseButton eventMouseButton && @event.IsActionReleased("GeneralClick"))
         {
             if (eventMouseButton.ButtonIndex == MouseButton.Left && MouseHovering)
             {
