@@ -3,10 +3,21 @@ using Godot;
 
 namespace GameJamPlaceHolderName.Scripts.integration;
 
+
+public enum WorkType
+{
+	Farm,
+	Mine,
+	//more to come if we have time 
+}
+
 public partial class BuildingAuthoring : Node2D
 {
 	[Export]
 	public int Health;
+
+	[Export] 
+	public WorkType WorkType;
 	
 	private StaticBody2D _building; 
 	private Sprite2D _buildingSprite;
@@ -88,6 +99,17 @@ public partial class BuildingAuthoring : Node2D
 
 	private void StartWork()
 	{
+
+		switch (WorkType)
+		{
+			case WorkType.Farm:
+				
+				break;
+			default:
+				GD.Print("No WorkType (Somehow)");
+				break;
+				
+		}
 		
 	}
 	
