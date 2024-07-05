@@ -85,33 +85,41 @@ public partial class BuildingAuthoring : Node2D
 	}
 	private void _OnAreaEntered(Area2D area)
     {
-	    GD.Print("Area was entered");
-	    if (area == _employedWorker.GetNode<Area2D>("Body/InteractionArea"))
+	    if (!_isWorking)
 	    {
-		   StartWork(); 
-		   OnWorkerArrived();
-		   GD.Print("Now Work commences");
+		    GD.Print("Area was entered");
+		    if (area == _employedWorker.GetNode<Area2D>("Body/InteractionArea"))
+		    {
+			    StartWork();
+			    OnWorkerArrived();
+			    GD.Print("Now Work commences");
+		    }
 	    }
     }
 
 	private void WorkerInteract()
 	{
-		if (GameManager.Instance.GetSelectedWorker() is not null)
+		if (GameManager.Instance.GetSelectedWorker() is not null  && !_isWorking && GameManager.Instance.hasWorkerSelected)
 		{
 			_employedWorker = GameManager.Instance.GetSelectedWorker();
 			
 			GD.Print("Worker Assigned");
 		}
-		else if (GameManager.Instance.GetSelectedWorker() is null && _isWorking)
+		if (GameManager.Instance.GetSelectedWorker() is null && _isWorking && !GameManager.Instance.hasWorkerSelected )
 		{
+			GD.Print("the removing is done");
 			RemoveEmployedWorker();
+		}
+		else
+		{
+			GD.Print("nuh-uh");
 		}
 	}
 
 	private void StartWork()
 	{
 		_isWorking = true;
-		
+		GD.Print("is Workin? " + _isWorking);
 		switch (WorkType)
 		{
 			case WorkType.Farm:

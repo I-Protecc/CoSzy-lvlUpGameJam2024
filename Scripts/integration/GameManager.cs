@@ -5,13 +5,14 @@ using Godot.Collections;
 public partial class GameManager : Node
 {
     public Node2D SelectedWorker;
+    public bool hasWorkerSelected;
     
     public static GameManager Instance;
 
     public int Money;
 
     public int IncomeMultiplier = 1;
-    public int PassiveIncome = 3;
+    public int PassiveIncome = 0;
 
     public int CurrentlyWorkingFarms;
     public int FarmProductionValue = 1;
@@ -36,18 +37,22 @@ public partial class GameManager : Node
     public void SetSelectedWorker(Node2D worker)
     {
         SelectedWorker = worker;
+        hasWorkerSelected = true;
         GD.Print("SELECTED " + worker.Name);
     }
 
     public void UnsetSelectedWorker()
     {
         SelectedWorker = null;
+        hasWorkerSelected = false;
         GD.Print("UNSELECTED");
     }
 
     public void NewCycle()
     {
         CycleIncome();
+        GD.Print("stonks " + Money);
+        GD.Print("currentlyWorkingFarms " + CurrentlyWorkingFarms);
     }
 
     private int _changeMoney(int moneyChange)
