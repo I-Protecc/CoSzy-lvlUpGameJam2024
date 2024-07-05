@@ -27,6 +27,7 @@ public partial class UnitMovement : CharacterBody2D
 
 		_navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		_worker = GetParent<Node2D>() as WorkerAuthoring;
+		GD.Print("worker " + _worker.Name);
 		
 		_navigationAgent.PathDesiredDistance = 4.0f;
 		_navigationAgent.TargetDesiredDistance = 2.0f;

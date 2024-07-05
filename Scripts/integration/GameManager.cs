@@ -90,7 +90,7 @@ public partial class GameManager : Node
 
     public int FarmsStoppedWorking(int amountThatStoppedWorking)
     {
-        return _changeCurrentlyWorkingFarms(amountThatStoppedWorking);
+        return _changeCurrentlyWorkingFarms(-amountThatStoppedWorking);
     }
     
     private int _changeCurrentlyWorkingMines(int workingMine)
@@ -105,7 +105,7 @@ public partial class GameManager : Node
 
     public int MineStoppedWorking(int amountThatStoppedWorking)
     {
-        return _changeCurrentlyWorkingMines(amountThatStoppedWorking);
+        return _changeCurrentlyWorkingMines(-amountThatStoppedWorking);
     }
     
 }

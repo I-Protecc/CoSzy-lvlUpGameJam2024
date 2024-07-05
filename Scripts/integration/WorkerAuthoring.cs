@@ -43,22 +43,23 @@ public partial class WorkerAuthoring : Node2D
     
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseButton eventMouseButton && @event.IsActionReleased("GeneralClick"))
+        
+        if (@event.IsActionReleased("GeneralClick") && !@event.IsEcho())
         {
-            if (eventMouseButton.ButtonIndex == MouseButton.Left && MouseInside)
+            if (@event.IsAction("LeftClick") && MouseInside)
             {
                 Selected = true;
                 GameManager.Instance.SetSelectedWorker(this);
                 ((ShaderMaterial)_workerSprite.Material).SetShaderParameter("outlined", true);
             }
-            else if (eventMouseButton.ButtonIndex == MouseButton.Left && !MouseInside)
+            else if (@event.IsAction("LeftClick") && !MouseInside && Selected)
             {
                 Selected = false;
                 GameManager.Instance.UnsetSelectedWorker();
                 ((ShaderMaterial)_workerSprite.Material).SetShaderParameter("outlined", false);
             }
             
-            if(eventMouseButton.ButtonIndex == MouseButton.Right && Selected)
+            if(@event.IsAction("RightClick") && Selected)
                 UnitMovement.MovementTarget = GetGlobalMousePosition();
         }
     }
