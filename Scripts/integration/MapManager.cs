@@ -12,8 +12,14 @@ public partial class MapManager : TileMap
     {
         foreach (Vector2I pos in tileMap.GetUsedCells(0))
         {
-            
+            var tileData = tileMap.GetCellTileData(0, pos);
+            var hits = (int)tileData.GetCustomDataByLayerId(0);
+            _tileHealth[pos] = hits;
         }
     }
 
+    public override void _Ready()
+    {
+        InitializeTileMap(this);
+    }
 }

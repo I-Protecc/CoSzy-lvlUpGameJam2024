@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2vpewwm38ysq"
-path="res://.godot/imported/tempGrass.png-79ad8e71e43f97aeb7f3f33b8d7db91d.ctex"
+uid="uid://b1h8d4uwkv6gn"
+path="res://.godot/imported/tempSet.png-a8e31ab82df2371e46cff7d846211cac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tilemap/tempGrass.png"
-dest_files=["res://.godot/imported/tempGrass.png-79ad8e71e43f97aeb7f3f33b8d7db91d.ctex"]
+source_file="res://Sprites/Tilemap/tempSet.png"
+dest_files=["res://.godot/imported/tempSet.png-a8e31ab82df2371e46cff7d846211cac.ctex"]
 
 [params]
 
