@@ -85,7 +85,7 @@ public partial class BuildingAuthoring : Node2D
 	}
 	private void _OnAreaEntered(Area2D area)
     {
-	    if (!_isWorking)
+	    if (!_isWorking && GameManager.Instance.SelectedBuilding == this)
 	    {
 		    GD.Print("Area was entered");
 		    if (_employedWorker != null)
@@ -106,6 +106,7 @@ public partial class BuildingAuthoring : Node2D
 		if (GameManager.Instance.GetSelectedWorker() is not null  && !_isWorking && GameManager.Instance.hasWorkerSelected)
 		{
 			_employedWorker = GameManager.Instance.GetSelectedWorker();
+			GameManager.Instance.SelectedBuilding = this;
 			
 			GD.Print("Worker Assigned");
 		}

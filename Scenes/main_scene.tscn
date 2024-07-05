@@ -42,3 +42,6 @@ position = Vector2(344, 24)
 
 [node name="Worker bernhart" parent="." instance=ExtResource("2_mjj12")]
 position = Vector2(166, 21)
+
+[node name="BuildingGeneric2" parent="." instance=ExtResource("4_in45m")]
+position = Vector2(-437, 23)

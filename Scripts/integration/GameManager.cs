@@ -6,6 +6,8 @@ public partial class GameManager : Node
 {
     public Node2D SelectedWorker;
     public bool hasWorkerSelected;
+
+    public Node2D SelectedBuilding;
     
     public static GameManager Instance;
 
