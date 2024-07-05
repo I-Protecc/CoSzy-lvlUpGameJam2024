@@ -17,13 +17,21 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pe56r"]
 texture = ExtResource("4_3dn04")
 0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:0/0/custom_data_0 = 5
 0:0/0/custom_data_1 = "Dirt"
 1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0/custom_data_0 = 2
 1:0/0/custom_data_1 = "Grass"
 
 [sub_resource type="TileSet" id="TileSet_3xrll"]
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 2
 custom_data_layer_0/name = "Hits"
 custom_data_layer_0/type = 2
 custom_data_layer_1/name = "Type"
