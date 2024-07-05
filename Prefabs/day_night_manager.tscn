@@ -6,7 +6,6 @@
 script = ExtResource("1_38qog")
 
 [node name="Sun" type="DirectionalLight2D" parent="."]
-energy = 0.0
 shadow_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

@@ -1,6 +1,6 @@
 using Godot;
-using System;
-using Godot.Collections;
+
+namespace GameJamPlaceHolderName.Scripts.integration;
 
 public partial class GameManager : Node
 {

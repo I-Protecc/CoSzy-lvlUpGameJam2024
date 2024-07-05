@@ -69,7 +69,7 @@ public partial class DayNightManager : Node
                 _dayTimeEnum = DayTime.Day;
                 _t = 0f;
                 _timer.Start();
-                GameManager.Instance.DaysPassed += 1;
+                GameJamPlaceHolderName.Scripts.integration.GameManager.Instance.DaysPassed += 1;
                 GD.Print("Switching from dawn to day");
                 
                 break;
