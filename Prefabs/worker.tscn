@@ -43,5 +43,8 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_2seox")
 texture = ExtResource("2_lwgaq")
 
+[node name="DirectionRay" type="RayCast2D" parent="Body"]
+target_position = Vector2(0, -50)
+
 [connection signal="mouse_entered" from="Body" to="Body" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Body" to="Body" method="_on_mouse_exited"]

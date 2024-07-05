@@ -33,10 +33,5 @@ public partial class MapManager : TileMap
     public override void _Ready()
     {
         InitializeTileMap(this);
-        MineTile(new Vector2I(-7, 4));
-        MineTile(new Vector2I(-7, 4));
-        MineTile(new Vector2I(-7, 4));
-        MineTile(new Vector2I(-7, 4));
-        MineTile(new Vector2I(-7, 4));
     }
 }
