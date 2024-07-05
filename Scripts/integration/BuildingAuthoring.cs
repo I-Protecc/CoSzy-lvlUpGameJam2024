@@ -8,6 +8,8 @@ public enum WorkType
 {
 	Farm,
 	Mine,
+	Wall,
+	DefenseTower,
 	//more to come if we have time 
 }
 
@@ -44,12 +46,16 @@ public partial class BuildingAuthoring : Node2D
 	{
 		if(Building.IsDestroyed) QueueFree();
 
-		if (_mouseChecker.Interacted)
+		if (_mouseChecker.Interacted && WorkType is not WorkType.DefenseTower and WorkType.Wall)
 		{
 			_mouseChecker.Interacted = false;
 			EmployWorker();
 		}
-	
+		else if(_mouseChecker.Interacted && WorkType is WorkType.DefenseTower)
+		{
+			_mouseChecker.Interacted = false;
+			// EmployWarrior();
+		}
 		
 	}
 
