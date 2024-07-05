@@ -16,6 +16,7 @@ public partial class WorkerAuthoring : Node2D
     public UnitMovement UnitMovement;
     private CharacterBody2D _worker;
     private Sprite2D _workerSprite;
+    private Node2D _workerNode2D;
     
     public Worker Worker { get; private set; }
 	
@@ -24,6 +25,7 @@ public partial class WorkerAuthoring : Node2D
     {
         Worker = new Worker(Health);
         UnitMovement = GetNode<CharacterBody2D>("Body") as UnitMovement;
+        _workerNode2D = GetNode<Node2D>(".");
         _worker = GetNode<CharacterBody2D>("Body");
         _workerSprite = _worker.GetNode<Sprite2D>("WorkerPlaceHolder");
     }
@@ -59,5 +61,10 @@ public partial class WorkerAuthoring : Node2D
             if(eventMouseButton.ButtonIndex == MouseButton.Right && Selected)
                 UnitMovement.MovementTarget = GetGlobalMousePosition();
         }
+    }
+
+    public void SwitchWorkerState(bool newState)
+    {
+        SetProcess(newState);
     }
 }

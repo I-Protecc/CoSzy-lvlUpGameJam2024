@@ -5,7 +5,6 @@ using Godot.Collections;
 public partial class GameManager : Node
 {
     public Node2D SelectedWorker;
-    private Node2D _empty;
     
     public static GameManager Instance;
 
@@ -20,30 +19,28 @@ public partial class GameManager : Node
     public int CurrentlyWorkingMines;
     public int MineProductionEfficiency;
     
-
     public int DaysPassed;
 
     public override void _Ready()
     {
-        _empty = new Node2D();
         Instance ??= this;
-        
     }
 
     public Node2D GetSelectedWorker()
     {
+        GD.Print("Getting " + SelectedWorker.Name);
         return SelectedWorker;
     }
 
     public void SetSelectedWorker(Node2D worker)
     {
         SelectedWorker = worker;
-        GD.Print("SELECTED");
+        GD.Print("SELECTED " + worker.Name);
     }
 
     public void UnsetSelectedWorker()
     {
-        SelectedWorker = _empty;
+        SelectedWorker = null;
         GD.Print("UNSELECTED");
     }
 

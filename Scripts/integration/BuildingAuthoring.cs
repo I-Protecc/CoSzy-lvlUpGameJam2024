@@ -19,6 +19,8 @@ public partial class BuildingAuthoring : Node2D
 	public int Health;
 
 	[Export] public WorkType WorkType = WorkType.Farm;
+
+	private bool _isWorking;
 	
 	private StaticBody2D _building; 
 	private Sprite2D _buildingSprite;
@@ -46,10 +48,10 @@ public partial class BuildingAuthoring : Node2D
 	{
 		if(Building.IsDestroyed) QueueFree();
 
-		if (_mouseChecker.Interacted && WorkType is not WorkType.DefenseTower and WorkType.Wall)
+		if (_mouseChecker.Interacted && WorkType is not WorkType.DefenseTower && WorkType is not WorkType.Wall)
 		{
 			_mouseChecker.Interacted = false;
-			EmployWorker();
+			WorkerInteract();
 		}
 		else if(_mouseChecker.Interacted && WorkType is WorkType.DefenseTower)
 		{
@@ -87,24 +89,29 @@ public partial class BuildingAuthoring : Node2D
 	    if (area == _employedWorker.GetNode<Area2D>("Body/InteractionArea"))
 	    {
 		   StartWork(); 
+		   OnWorkerArrived();
 		   GD.Print("Now Work commences");
 	    }
-	    
-	    
     }
 
-	private void EmployWorker()
+	private void WorkerInteract()
 	{
 		if (GameManager.Instance.GetSelectedWorker() is not null)
 		{
 			_employedWorker = GameManager.Instance.GetSelectedWorker();
+			
 			GD.Print("Worker Assigned");
+		}
+		else if (GameManager.Instance.GetSelectedWorker() is null && _isWorking)
+		{
+			RemoveEmployedWorker();
 		}
 	}
 
 	private void StartWork()
 	{
-
+		_isWorking = true;
+		
 		switch (WorkType)
 		{
 			case WorkType.Farm:
@@ -120,7 +127,41 @@ public partial class BuildingAuthoring : Node2D
 		}
 		
 	}
-	
+	private void StopWork()
+	{
+		_isWorking = false;
+		
+		switch (WorkType)
+		{
+			case WorkType.Farm:
+				GameManager.Instance.FarmsStoppedWorking(1);
+				break;
+			case WorkType.Mine:
+				GameManager.Instance.MineStoppedWorking(1);
+				break;
+			default:
+				GD.Print("No WorkType (Somehow)");
+				break;
+				
+		}
+		
+	}
+
+	private void RemoveEmployedWorker()
+	{
+		OnWorkerLeave();
+		StopWork();
+	}
+
+	private void OnWorkerArrived()
+	{
+		if (_employedWorker is WorkerAuthoring workerAuthoring) workerAuthoring.SwitchWorkerState(false);
+	}
+
+	private void OnWorkerLeave()
+	{
+		if (_employedWorker is WorkerAuthoring workerAuthoring) workerAuthoring.SwitchWorkerState(true);
+	}
 }
 
 
