@@ -11,12 +11,19 @@ public partial class GameManager : Node
 
     public int Money;
 
+    public int IncomeMultiplier = 1;
+    public int PassiveIncome = 3;
+
+    public int CurrentlyWorkingFarms;
+    public int FarmProductionValue = 1;
+
     public int DaysPassed;
 
     public override void _Ready()
     {
         _empty = new Node2D();
         Instance ??= this;
+        
     }
 
     public Node2D GetSelectedWorker()
@@ -35,4 +42,33 @@ public partial class GameManager : Node
         SelectedWorker = _empty;
         GD.Print("UNSELECTED");
     }
+
+    public void NewCycle()
+    {
+        CycleIncome();
+    }
+
+    private int _changeMoney(int moneyChange)
+    {
+        return Money = Math.Clamp(Money + moneyChange, 0, 9999);
+    }
+
+    public int SpendMoney(int moneyLoss)
+    {
+        return _changeMoney(-moneyLoss);
+    }
+
+    public int GainMoney(int moneyGain)
+    {
+        return _changeMoney(moneyGain);
+    }
+
+    public void CycleIncome()
+    {
+        GainMoney(PassiveIncome); // Join the "definitely not a pyramid scheme" group || fall back to make mistakes early game less punishing
+        GainMoney(FarmProductionValue * CurrentlyWorkingFarms * IncomeMultiplier);
+        
+        // More Incomes here
+    }
+    
 }
