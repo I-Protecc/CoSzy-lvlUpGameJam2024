@@ -78,12 +78,12 @@ public partial class GameManager : Node
 
     public int FarmsStartedWorking(int amountThatStartedWorking)
     {
-        return _changeMoney(amountThatStartedWorking);
+        return _changeCurrentlyWorkingFarms(amountThatStartedWorking);
     }
 
     public int FarmsStoppedWorking(int amountThatStoppedWorking)
     {
-        return _changeMoney(amountThatStoppedWorking);
+        return _changeCurrentlyWorkingFarms(amountThatStoppedWorking);
     }
     
 }
