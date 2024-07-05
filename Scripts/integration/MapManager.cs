@@ -15,11 +15,28 @@ public partial class MapManager : TileMap
             var tileData = tileMap.GetCellTileData(0, pos);
             var hits = (int)tileData.GetCustomDataByLayerId(0);
             _tileHealth[pos] = hits;
+            GD.Print(pos);
         }
+    }
+
+    public void MineTile(Vector2I tilePos)
+    {
+        if (_tileHealth.ContainsKey(tilePos))
+        {
+            _tileHealth[tilePos] -= 1;
+        }
+        
+        if(_tileHealth[tilePos] <= 0)
+            this.SetCell(0, tilePos);
     }
 
     public override void _Ready()
     {
         InitializeTileMap(this);
+        MineTile(new Vector2I(-7, 4));
+        MineTile(new Vector2I(-7, 4));
+        MineTile(new Vector2I(-7, 4));
+        MineTile(new Vector2I(-7, 4));
+        MineTile(new Vector2I(-7, 4));
     }
 }
