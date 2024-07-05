@@ -17,6 +17,10 @@ public partial class GameManager : Node
     public int CurrentlyWorkingFarms;
     public int FarmProductionValue = 1;
 
+    public int CurrentlyWorkingMines;
+    public int MineProductionEfficiency;
+    
+
     public int DaysPassed;
 
     public override void _Ready()
@@ -84,6 +88,21 @@ public partial class GameManager : Node
     public int FarmsStoppedWorking(int amountThatStoppedWorking)
     {
         return _changeCurrentlyWorkingFarms(amountThatStoppedWorking);
+    }
+    
+    private int _changeCurrentlyWorkingMines(int workingMine)
+    {
+        return CurrentlyWorkingMines = Math.Clamp(CurrentlyWorkingMines + workingMine, 0, 9999);
+    }
+
+    public int MineStartedWorking(int amountThatStartedWorking)
+    {
+        return _changeCurrentlyWorkingMines(amountThatStartedWorking);
+    }
+
+    public int MineStoppedWorking(int amountThatStoppedWorking)
+    {
+        return _changeCurrentlyWorkingMines(amountThatStoppedWorking);
     }
     
 }
