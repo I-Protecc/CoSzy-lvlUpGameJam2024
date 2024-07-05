@@ -17,7 +17,11 @@ public class Worker
     {
         Health = _healthPool.DecreaseHealth(damage);
     }
-    
+
+    public void FullHeal()
+    {
+        Health = _healthPool.IncreaseHealth(_healthPool.maxHealth - Health);
+    }
     
     public void Kill()
     {

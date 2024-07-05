@@ -77,4 +77,10 @@ public partial class WorkerAuthoring : Node2D
             Show();
         }
     }
+
+    public void NewCycleHeal()
+    {
+        
+        Worker.FullHeal();
+    }
 }

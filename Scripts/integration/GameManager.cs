@@ -55,6 +55,7 @@ public partial class GameManager : Node
         CycleIncome();
         GD.Print("stonks " + Money);
         GD.Print("currentlyWorkingFarms " + CurrentlyWorkingFarms);
+        
     }
 
     private int _changeMoney(int moneyChange)
