@@ -71,4 +71,19 @@ public partial class GameManager : Node
         // More Incomes here
     }
     
+    private int _changeCurrentlyWorkingFarms(int workingFarms)
+    {
+        return CurrentlyWorkingFarms = Math.Clamp(CurrentlyWorkingFarms + workingFarms, 0, 9999);
+    }
+
+    public int FarmsStartedWorking(int amountThatStartedWorking)
+    {
+        return _changeMoney(amountThatStartedWorking);
+    }
+
+    public int FarmsStoppedWorking(int amountThatStoppedWorking)
+    {
+        return _changeMoney(amountThatStoppedWorking);
+    }
+    
 }

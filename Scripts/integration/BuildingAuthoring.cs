@@ -16,8 +16,7 @@ public partial class BuildingAuthoring : Node2D
 	[Export]
 	public int Health;
 
-	[Export] 
-	public WorkType WorkType;
+	[Export] public WorkType WorkType = WorkType.Farm;
 	
 	private StaticBody2D _building; 
 	private Sprite2D _buildingSprite;
