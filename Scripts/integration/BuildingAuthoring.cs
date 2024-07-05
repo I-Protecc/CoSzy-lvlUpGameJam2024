@@ -37,11 +37,9 @@ public partial class BuildingAuthoring : Node2D
 		_building = GetNode<StaticBody2D>("Body");
 		_buildingSprite = GetNode<Sprite2D>("Body/BuildingPlaceHolder");
 		_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
-
 		_area2D = GetNode<Area2D>("Body/Area2D");
 		_area2D.AreaEntered += _OnAreaEntered;
-
-	}
+	} 
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -94,10 +92,10 @@ public partial class BuildingAuthoring : Node2D
 			    {
 				    StartWork();
 				    OnWorkerArrived();
+				    GameManager.Instance.UnsetSelectedWorker();
 				    GD.Print("Now Work commences");
 			    }
 		    }
-		    
 	    }
     }
 
