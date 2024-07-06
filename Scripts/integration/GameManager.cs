@@ -1,4 +1,6 @@
+using System;
 using Godot;
+using Godot.Collections;
 
 namespace GameJamPlaceHolderName.Scripts.integration;
 
@@ -10,6 +12,7 @@ public partial class GameManager : Node
     public static GameManager Instance;
 
     public int Money;
+    private Dictionary<String, int> _inventory = new Dictionary<string, int>();
 
     public int DaysPassed;
 
@@ -34,5 +37,27 @@ public partial class GameManager : Node
     {
         SelectedWorker = _empty;
         GD.Print("UNSELECTED");
+    }
+    
+    public void AddToInventory(string itemType, int amount)
+    {
+        if (_inventory.ContainsKey(itemType))
+            _inventory[itemType] += amount;
+        else
+            _inventory.Add(itemType, amount);
+    }
+
+    public void RemoveFromInventory(string itemType, int amount)
+    {
+        if (_inventory.ContainsKey(itemType))
+        {
+            _inventory[itemType] -= amount;
+            _inventory[itemType] = Mathf.Clamp(_inventory[itemType], 0, 9999);
+        }
+    }
+
+    public int GetAmountInInventory(string itemType)
+    {
+        return _inventory[itemType];
     }
 }
