@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c71k4n13278yg"]
+[gd_scene load_steps=3 format=3 uid="uid://dptdnva1dhi76"]
 
 [ext_resource type="Script" path="res://Scripts/integration/UnitAttack.cs" id="1_fq6bt"]
 
@@ -6,7 +6,7 @@
 size = Vector2(80, 80)
 
 [node name="AttackArea" type="Area2D"]
-collision_layer = 0
+collision_layer = 128
 collision_mask = 15
 script = ExtResource("1_fq6bt")
 WaitTime = 1.0

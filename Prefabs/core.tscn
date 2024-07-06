@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy5wkumqo4i13"]
+[gd_scene load_steps=6 format=3 uid="uid://dy5wkumqo4i13"]
 
 [ext_resource type="Script" path="res://Scripts/integration/Hive/CoreAuthoring.cs" id="1_2rtqf"]
 [ext_resource type="Texture2D" uid="uid://t0jxmlvon7rd" path="res://Sprites/Placeholder.png" id="2_pwsrf"]
@@ -7,6 +7,9 @@
 size = Vector2(99, 108)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jw2j2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrw28"]
+size = Vector2(99, 106)
 
 [node name="Core" type="Node2D" groups=["Core"]]
 script = ExtResource("1_2rtqf")
@@ -22,3 +25,10 @@ texture_filter = 1
 material = SubResource("CanvasItemMaterial_jw2j2")
 scale = Vector2(1.5625, 1.65625)
 texture = ExtResource("2_pwsrf")
+
+[node name="Area2D" type="Area2D" parent="StaticBody2D"]
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_wrw28")
