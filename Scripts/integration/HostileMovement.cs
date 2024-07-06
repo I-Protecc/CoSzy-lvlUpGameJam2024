@@ -1,6 +1,6 @@
 using Godot;
-using System;
-using GameJamPlaceHolderName.Scripts.integration;
+
+namespace GameJamPlaceHolderName.Scripts.integration;
 
 public partial class HostileMovement : CharacterBody2D
 {

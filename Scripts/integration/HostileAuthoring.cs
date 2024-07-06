@@ -13,10 +13,10 @@ public partial class HostileAuthoring : Node2D
 	public float DamageAmount;
 	
 	public HostileMovement HostileMovement;
+	public UnitAttack UnitAttack;
 	private CharacterBody2D _hostileWorker;
 	private Node2D _hostileWorkerNode2D;
-	private Area2D _area2D;
-	private Timer _timer;
+	private Area2D _attackArea;
 	private Node2D _attackedTarget;
 	
 	public Hostile Hostile { get; private set; }
@@ -27,10 +27,11 @@ public partial class HostileAuthoring : Node2D
 		Hostile = new Hostile(Health);
 		
 		HostileMovement = GetNode<CharacterBody2D>("Body") as HostileMovement;
+		UnitAttack = GetNode<Area2D>("AttackArea") as UnitAttack;
 		_hostileWorkerNode2D = GetNode<Node2D>(".");
 		_hostileWorker = GetNode<CharacterBody2D>("Body");
-		_area2D = GetNode<Area2D>("Body/Area2D");
-		_timer = GetNode<Timer>("Timer");
+		_attackArea = GetNode<Area2D>("AttackArea");
+		
 		
 		if (HostileMovement != null) HostileMovement.MoveToCore();
 	}

@@ -26,7 +26,7 @@ public partial class UnitAttack : Area2D
     
     private void _OnAreaEntered(Area2D area)
     {
-        if (area is not null  && area.GetParent().GetParent() is Node2D )
+        if (area is not null && area.GetParent().GetParent() is Node2D )
         {
             _attackedTarget= area.GetParent().GetParent<Node2D>();
             if(HasMethod("GetDamageAmount")) _damageAmount = (float)_attackedTarget.Call("GetDamageAmount");

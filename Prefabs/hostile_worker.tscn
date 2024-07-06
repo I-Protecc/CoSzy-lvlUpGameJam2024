@@ -3,12 +3,10 @@
 [ext_resource type="Script" path="res://Scripts/integration/HostileAuthoring.cs" id="1_a0d4k"]
 [ext_resource type="Script" path="res://Scripts/integration/HostileMovement.cs" id="2_mquep"]
 [ext_resource type="Texture2D" uid="uid://dj3lp0obg8kx2" path="res://Sprites/HostileWorkerPlaceHolderpng.png" id="3_axmgi"]
+[ext_resource type="PackedScene" uid="uid://tfn5o1b3nv0h" path="res://Prefabs/Utility/attack_area.tscn" id="4_clr8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gse6q"]
 size = Vector2(63, 63)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7btq"]
-size = Vector2(64, 64)
 
 [node name="HostileWorker" type="Node2D"]
 script = ExtResource("1_a0d4k")
@@ -28,14 +26,4 @@ shape = SubResource("RectangleShape2D_gse6q")
 texture_filter = 1
 texture = ExtResource("3_axmgi")
 
-[node name="Area2D" type="Area2D" parent="Body"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Area2D"]
-shape = SubResource("RectangleShape2D_n7btq")
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="area_entered" from="Body/Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Body/Area2D" to="." method="_on_area_2d_area_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="AttackArea" parent="." instance=ExtResource("4_clr8m")]
