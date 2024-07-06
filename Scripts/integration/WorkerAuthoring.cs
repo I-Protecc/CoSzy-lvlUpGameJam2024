@@ -80,7 +80,6 @@ public partial class WorkerAuthoring : Node2D
 
     public void NewCycleHeal()
     {
-        
         Worker.FullHeal();
     }
 }

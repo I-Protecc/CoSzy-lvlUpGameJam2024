@@ -1,24 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuu6mdaba3t0j"]
+[gd_scene load_steps=6 format=3 uid="uid://cuu6mdaba3t0j"]
 
-[ext_resource type="Script" path="res://HostileWorkerAuthoring.cs" id="1_rw4ro"]
+[ext_resource type="Script" path="res://Scripts/integration/HostileAuthoring.cs" id="1_a0d4k"]
 [ext_resource type="Script" path="res://Scripts/integration/HostileMovement.cs" id="2_mquep"]
 [ext_resource type="Texture2D" uid="uid://dj3lp0obg8kx2" path="res://Sprites/HostileWorkerPlaceHolderpng.png" id="3_axmgi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gse6q"]
 size = Vector2(63, 63)
 
-[node name="HostileWorker" type="Node2D"]
-script = ExtResource("1_rw4ro")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7btq"]
+size = Vector2(64, 64)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="HostileWorker" type="Node2D"]
+script = ExtResource("1_a0d4k")
+
+[node name="Body" type="CharacterBody2D" parent="."]
 script = ExtResource("2_mquep")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_gse6q")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
 
-[node name="HostileWorkerPlaceHolderpng" type="Sprite2D" parent="CharacterBody2D"]
+[node name="HostileWorkerPlaceHolderpng" type="Sprite2D" parent="Body"]
 texture_filter = 1
 texture = ExtResource("3_axmgi")
+
+[node name="Area2D" type="Area2D" parent="Body"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Area2D"]
+shape = SubResource("RectangleShape2D_n7btq")
+
+[connection signal="area_entered" from="Body/Area2D" to="." method="_on_area_2d_area_entered"]
