@@ -10,6 +10,7 @@ size = Vector2(99, 108)
 
 [node name="Core" type="Node2D" groups=["Core"]]
 script = ExtResource("1_2rtqf")
+Health = 100.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
