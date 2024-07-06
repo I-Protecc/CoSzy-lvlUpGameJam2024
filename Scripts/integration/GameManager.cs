@@ -77,7 +77,6 @@ public partial class GameManager : Node
     {
         return _inventory[itemType];
     }
-}
 
     public void NewCycle()
     {
@@ -105,7 +104,6 @@ public partial class GameManager : Node
     {
         GainMoney(PassiveIncome); // Join the "definitely not a pyramid scheme" group || fall back to make mistakes early game less punishing
         GainMoney(FarmProductionValue * CurrentlyWorkingFarms * IncomeMultiplier);
-        
         // More Incomes here
     }
     
@@ -138,5 +136,4 @@ public partial class GameManager : Node
     {
         return _changeCurrentlyWorkingMines(-amountThatStoppedWorking);
     }
-    
 }
