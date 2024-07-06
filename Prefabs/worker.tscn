@@ -20,6 +20,7 @@ shader_parameter/number_of_images = Vector2(1, 1)
 shader_parameter/outlined = false
 
 [node name="Worker" type="Node2D" groups=["Workers"]]
+z_index = 10
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_0hcoq")
 Health = 10.0
