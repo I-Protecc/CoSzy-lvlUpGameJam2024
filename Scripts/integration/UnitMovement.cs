@@ -57,7 +57,7 @@ public partial class UnitMovement : CharacterBody2D
 
 		Vector2 direction = currentAgentPosition.DirectionTo(nextPathPosition);
 
-		_directionRay.TargetPosition = direction / direction.Length() * 80; 
+		_directionRay.TargetPosition = direction / direction.Length() * 100; 
 
 		Velocity = direction * _movementSpeed;
 		MoveAndSlide();

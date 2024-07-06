@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dptdnva1dhi76"]
+
+[ext_resource type="Script" path="res://Scripts/integration/UnitAttack.cs" id="1_fq6bt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l71pe"]
+size = Vector2(80, 80)
+
+[node name="AttackArea" type="Area2D"]
+collision_layer = 128
+collision_mask = 15
+script = ExtResource("1_fq6bt")
+WaitTime = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l71pe")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
