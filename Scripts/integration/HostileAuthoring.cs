@@ -41,13 +41,18 @@ public partial class HostileAuthoring : Node2D
 	public override void _PhysicsProcess(double delta)
 	{
 		if (Hostile.IsDead) QueueFree();
-		
+		if(GameManager.Instance.StartOfNewDay) Kill();
 		
 	}
 	
-	public void TakeDamage(float damage)
+	public void Damage(float damage)
 	{
 		Hostile.Damage(damage);
+	}
+
+	public void Kill()
+	{
+		Hostile.Kill();
 	}
 
 	public float GetDamageAmount()
