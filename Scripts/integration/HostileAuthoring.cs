@@ -31,7 +31,8 @@ public partial class HostileAuthoring : Node2D
 		_hostileWorkerNode2D = GetNode<Node2D>(".");
 		_hostileWorker = GetNode<CharacterBody2D>("Body");
 		_attackArea = GetNode<Area2D>("AttackArea");
-		
+
+		//UnitAttack.
 		
 		if (HostileMovement != null) HostileMovement.MoveToCore();
 	}

@@ -26,11 +26,18 @@ public partial class UnitAttack : Area2D
     
     private void _OnAreaEntered(Area2D area)
     {
+        GD.Print("attack area entered");
         if (area is not null && area.GetParent().GetParent() is Node2D )
         {
+            GD.Print("target accepted");
             _attackedTarget= area.GetParent().GetParent<Node2D>();
-            if(HasMethod("GetDamageAmount")) _damageAmount = (float)_attackedTarget.Call("GetDamageAmount");
+            if (HasMethod("GetDamageAmount"))
+            {
+                GD.Print("Trying to get damage amount");
+                _damageAmount = (float)_attackedTarget.Call("GetDamageAmount");
+            }
             _timer.Start();
+            GD.Print("timer started");
         }
     }
 
@@ -38,12 +45,18 @@ public partial class UnitAttack : Area2D
     {
         if (area == _attackedTarget)
         {
+            GD.Print("Stopping Timer");
             _timer.Stop();
         }
     }
 
     private void OnTimerTimeout()
     {
-        if (_attackedTarget.HasMethod("Damage")) _attackedTarget.Call("Damage",  _damageAmount );
+        if (_attackedTarget.HasMethod("Damage"))
+        {
+            _attackedTarget.Call("Damage", _damageAmount); 
+            GD.Print("damage method called");
+        };
+        GD.Print("tried dealing damage");
     }
 }
