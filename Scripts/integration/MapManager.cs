@@ -29,7 +29,7 @@ public partial class MapManager : TileMap
             return;
         
         if(_tileHealth[tilePos] <= 0)
-            this.SetCell(0, tilePos);
+            SetCell(0, tilePos);
     }
 
     public override void _Ready()

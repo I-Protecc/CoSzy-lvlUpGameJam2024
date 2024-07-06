@@ -7,7 +7,6 @@ public partial class UnitMovement : CharacterBody2D
 	private NavigationAgent2D _navigationAgent;
 	
 	private RayCast2D _directionRay;
-	private bool _rayColliding;
 
 	private float _movementSpeed = 200.0f;
 
@@ -15,8 +14,8 @@ public partial class UnitMovement : CharacterBody2D
 
 	public Vector2 MovementTarget
 	{
-		get { return _navigationAgent.TargetPosition; }
-		set { _navigationAgent.TargetPosition = value; }
+		get => _navigationAgent.TargetPosition;
+		set => _navigationAgent.TargetPosition = value;
 	}
 
 	public override void _Ready()
@@ -43,9 +42,7 @@ public partial class UnitMovement : CharacterBody2D
 		base._PhysicsProcess(delta);
 
 		if (_navigationAgent.IsNavigationFinished())
-		{
 			return;
-		}
 
 		Vector2 currentAgentPosition = GlobalTransform.Origin;
 		Vector2 nextPathPosition = _navigationAgent.GetNextPathPosition();
@@ -59,7 +56,6 @@ public partial class UnitMovement : CharacterBody2D
 
 		if (!_directionRay.IsColliding()) return;
 		
-		_rayColliding = true;
 		var collider = _directionRay.GetCollider();
 			
 		if (collider is not TileMap map) return;
