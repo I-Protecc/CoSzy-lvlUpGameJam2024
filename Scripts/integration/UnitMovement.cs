@@ -25,6 +25,7 @@ public partial class UnitMovement : CharacterBody2D
 
 		_navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		_worker = GetParent<Node2D>() as WorkerAuthoring;
+
 		_directionRay = GetNode<RayCast2D>("DirectionRay");
 		_mineTimer = GetNode<Timer>("Timer");
 		

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://niaarae6fuq"]
+
+[ext_resource type="Script" path="res://Scripts/integration/BuildingAuthoring.cs" id="1_do3kk"]
+[ext_resource type="PackedScene" uid="uid://26s6wfd4oeua" path="res://Prefabs/Utility/MouseHoverCheck.tscn" id="2_hbf2l"]
+[ext_resource type="Texture2D" uid="uid://d218fqpau6omk" path="res://Sprites/BuildingPlaceHolder.png" id="2_ka7s2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5cud"]
+size = Vector2(64, 64)
+
+[node name="BuildingGeneric" type="Node2D"]
+script = ExtResource("1_do3kk")
+Health = 50
+
+[node name="Body" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_x5cud")
+
+[node name="Area2D" parent="Body" instance=ExtResource("2_hbf2l")]
+position = Vector2(163, -23)
+collision_layer = 2
+collision_mask = 2
+
+[node name="BuildingPlaceHolder" type="Sprite2D" parent="Body"]
+position = Vector2(0, -1)
+texture = ExtResource("2_ka7s2")
+
+[connection signal="mouse_entered" from="Body" to="." method="_on_body_mouse_entered"]
+[connection signal="mouse_exited" from="Body" to="." method="_on_body_mouse_exited"]
+[connection signal="area_entered" from="Body/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Body/Area2D" to="." method="_on_area_2d_body_entered"]

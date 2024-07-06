@@ -15,6 +15,7 @@ public partial class WorkerAuthoring : Node2D
     public UnitMovement UnitMovement;
     private CharacterBody2D _worker;
     private Sprite2D _workerSprite;
+    private Node2D _workerNode2D;
     
     public Worker Worker { get; private set; }
 	
@@ -23,6 +24,7 @@ public partial class WorkerAuthoring : Node2D
     {
         Worker = new Worker(Health);
         UnitMovement = GetNode<CharacterBody2D>("Body") as UnitMovement;
+        _workerNode2D = GetNode<Node2D>(".");
         _worker = GetNode<CharacterBody2D>("Body");
         _workerSprite = _worker.GetNode<Sprite2D>("WorkerPlaceHolder");
     }
@@ -40,23 +42,38 @@ public partial class WorkerAuthoring : Node2D
     
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseButton eventMouseButton)
+        
+        if (@event.IsActionReleased("GeneralClick") && !@event.IsEcho())
         {
-            if (eventMouseButton.ButtonIndex == MouseButton.Left && MouseInside)
+            if (@event.IsAction("LeftClick") && MouseInside)
             {
                 Selected = true;
                 GameManager.Instance.SetSelectedWorker(this);
                 ((ShaderMaterial)_workerSprite.Material).SetShaderParameter("outlined", true);
             }
-            else if (eventMouseButton.ButtonIndex == MouseButton.Left && !MouseInside)
+            else if (@event.IsAction("LeftClick") && !MouseInside && Selected)
             {
                 Selected = false;
                 GameManager.Instance.UnsetSelectedWorker();
                 ((ShaderMaterial)_workerSprite.Material).SetShaderParameter("outlined", false);
             }
             
-            if(eventMouseButton.ButtonIndex == MouseButton.Right && Selected)
+            if(@event.IsAction("RightClick") && Selected)
                 UnitMovement.MovementTarget = GetGlobalMousePosition();
+        }
+    }
+
+    public void SwitchWorkerState(bool newState)
+    {
+        GD.Print("state switched to " + newState);
+        SetProcess(newState);
+        if (newState == false)
+        {
+            Hide();
+        }
+        else
+        {
+            Show();
         }
     }
 }
