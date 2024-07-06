@@ -72,7 +72,7 @@ public partial class UnitMovement : CharacterBody2D
 		if (collider is not TileMap map) return;
 			
 		MapManager manager = map as MapManager;
-		Vector2 hitPoint = map.ToLocal(_directionRay.GetCollisionPoint());
+		Vector2 hitPoint = map.ToLocal(_directionRay.GetCollisionPoint() - _directionRay.GetCollisionNormal());
 		Vector2I tilePos = map.LocalToMap(hitPoint);
 
 		if (_mayMine)
