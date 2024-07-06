@@ -5,10 +5,11 @@ namespace GameJamPlaceHolderName.Scripts.integration;
 public partial class UnitMovement : CharacterBody2D
 {
 	private NavigationAgent2D _navigationAgent;
-	
 	private RayCast2D _directionRay;
+	private Timer _mineTimer;
 
 	private float _movementSpeed = 200.0f;
+	private bool _mayMine;
 
 	private WorkerAuthoring _worker;
 
@@ -22,19 +23,25 @@ public partial class UnitMovement : CharacterBody2D
 	{
 		base._Ready();
 
-		this.MouseEntered += _onMouseEntered;
-		this.MouseExited += _onMouseExited;
-
 		_navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		_worker = GetParent<Node2D>() as WorkerAuthoring;
-
 		_directionRay = GetNode<RayCast2D>("DirectionRay");
+		_mineTimer = GetNode<Timer>("Timer");
+		
+		_mineTimer.Timeout += MineTimerOnTimeout;
+		this.MouseEntered += _onMouseEntered;
+		this.MouseExited += _onMouseExited;
 		
 		_navigationAgent.PathDesiredDistance = 4.0f;
 		_navigationAgent.TargetDesiredDistance = 2.0f;
 
 		// Make sure to not await during _Ready.
 		Callable.From(ActorSetup).CallDeferred();
+	}
+
+	private void MineTimerOnTimeout()
+	{
+		_mayMine = true;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -54,7 +61,10 @@ public partial class UnitMovement : CharacterBody2D
 		Velocity = direction * _movementSpeed;
 		MoveAndSlide();
 
-		if (!_directionRay.IsColliding()) return;
+		if (!_directionRay.IsColliding())
+		{
+			return;
+		}
 		
 		var collider = _directionRay.GetCollider();
 			
@@ -64,7 +74,11 @@ public partial class UnitMovement : CharacterBody2D
 		Vector2 hitPoint = map.ToLocal(_directionRay.GetCollisionPoint());
 		Vector2I tilePos = map.LocalToMap(hitPoint);
 
-		manager?.MineTile(tilePos);
+		if (_mayMine)
+		{
+			manager?.MineTile(tilePos);
+			_mayMine = false;
+		}
 	}
 
 	private async void ActorSetup()

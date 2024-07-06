@@ -21,15 +21,20 @@ public partial class MapManager : TileMap
 
     public void MineTile(Vector2I tilePos)
     {
-        if (_tileHealth.ContainsKey(tilePos))
+        if (_tileHealth.ContainsKey(tilePos) && _tileHealth[tilePos] > 0)
         {
             _tileHealth[tilePos] -= 1;
+            GD.Print("Mining");
         }
-        else
-            return;
+        else return;
         
         if(_tileHealth[tilePos] <= 0)
-            SetCell(0, tilePos);
+        {
+            SetCell(0, tilePos, -1);
+            GD.Print(GetCellAtlasCoords(0, tilePos));
+            
+            GD.Print("Mined - " + _tileHealth[tilePos]);
+        }    
     }
 
     public override void _Ready()
