@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://tfn5o1b3nv0h"]
+[gd_scene load_steps=3 format=3 uid="uid://c71k4n13278yg"]
 
 [ext_resource type="Script" path="res://Scripts/integration/UnitAttack.cs" id="1_fq6bt"]
 

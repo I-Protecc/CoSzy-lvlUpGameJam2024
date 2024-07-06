@@ -27,10 +27,10 @@ public partial class HostileAuthoring : Node2D
 		Hostile = new Hostile(Health);
 		
 		HostileMovement = GetNode<CharacterBody2D>("Body") as HostileMovement;
-		UnitAttack = GetNode<Area2D>("AttackArea") as UnitAttack;
+		UnitAttack = GetNode<Area2D>("Body/AttackArea") as UnitAttack;
 		_hostileWorkerNode2D = GetNode<Node2D>(".");
 		_hostileWorker = GetNode<CharacterBody2D>("Body");
-		_attackArea = GetNode<Area2D>("AttackArea");
+		_attackArea = GetNode<Area2D>("Body/AttackArea");
 
 		//UnitAttack.
 		

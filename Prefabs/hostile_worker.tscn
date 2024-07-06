@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuu6mdaba3t0j"]
+[gd_scene load_steps=5 format=3 uid="uid://f4hmwalrpp2d"]
 
 [ext_resource type="Script" path="res://Scripts/integration/HostileAuthoring.cs" id="1_a0d4k"]
-[ext_resource type="Texture2D" uid="uid://dj3lp0obg8kx2" path="res://Sprites/HostileWorkerPlaceHolderpng.png" id="3_axmgi"]
-[ext_resource type="PackedScene" uid="uid://tfn5o1b3nv0h" path="res://Prefabs/Utility/attack_area.tscn" id="4_clr8m"]
+[ext_resource type="Texture2D" path="res://Sprites/HostileWorkerPlaceHolderpng.png" id="3_axmgi"]
+[ext_resource type="PackedScene" uid="uid://c71k4n13278yg" path="res://Prefabs/Utility/attack_area.tscn" id="4_clr8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gse6q"]
 size = Vector2(63, 63)
