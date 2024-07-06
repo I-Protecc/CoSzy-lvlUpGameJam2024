@@ -35,28 +35,39 @@ public partial class BuildingAuthoring : Node2D
 	{
 		Building = new Building(Health);
 		_building = GetNode<StaticBody2D>("Body");
-		_buildingSprite = GetNode<Sprite2D>("Body/BuildingPlaceHolder");
-		_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
-		_area2D = GetNode<Area2D>("Body/Area2D");
-		_area2D.AreaEntered += _OnAreaEntered;
+		
+		if (this.WorkType is WorkType.Farm or WorkType.Farm)
+		{
+			_buildingSprite = GetNode<Sprite2D>("Body/BuildingPlaceHolder");
+			_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
+			_area2D = GetNode<Area2D>("Body/Area2D"); 
+			_area2D.AreaEntered += _OnAreaEntered;
+		}
+		else if (this.WorkType is WorkType.Wall)
+		{
+			_area2D = GetNode<Area2D>("Body/Area2D"); 
+			_buildingSprite = GetNode<Sprite2D>("Body/WallPlaceHolder");
+		}
+		
 	} 
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if(Building.IsDestroyed) QueueFree();
-
-		if (_mouseChecker.Interacted && WorkType is not WorkType.DefenseTower && WorkType is not WorkType.Wall)
-		{
-			_mouseChecker.Interacted = false;
-			WorkerInteract();
-		}
-		else if(_mouseChecker.Interacted && WorkType is WorkType.DefenseTower)
-		{
-			_mouseChecker.Interacted = false;
-			// EmployWarrior();
-		}
 		
+		if(this.WorkType != WorkType.Wall){
+			if (_mouseChecker.Interacted && WorkType is not WorkType.DefenseTower && WorkType is not WorkType.Wall)
+			{
+				_mouseChecker.Interacted = false;
+				WorkerInteract();
+			}
+			else if(_mouseChecker.Interacted && WorkType is WorkType.DefenseTower)
+			{
+				_mouseChecker.Interacted = false;
+				// EmployWarrior();
+			}
+		}
 	}
 
 	public void Damage(float damage)
@@ -131,6 +142,8 @@ public partial class BuildingAuthoring : Node2D
 			case WorkType.Mine:
 				GameManager.Instance.MineStartedWorking(1);
 				break;
+			case WorkType.Wall:
+				break;
 			default:
 				GD.Print("No WorkType (Somehow)");
 				break;
@@ -149,6 +162,8 @@ public partial class BuildingAuthoring : Node2D
 				break;
 			case WorkType.Mine:
 				GameManager.Instance.MineStoppedWorking(1);
+				break;
+			case WorkType.Wall:
 				break;
 			default:
 				GD.Print("No WorkType (Somehow)");
