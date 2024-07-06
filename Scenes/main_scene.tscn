@@ -72,7 +72,7 @@ position = Vector2(96, 23)
 position = Vector2(15, -2)
 navigation_polygon = SubResource("NavigationPolygon_j2w1w")
 
-[node name="GameManager" type="Node" parent="."]
+[node name="GameManager" type="Node2D" parent="."]
 
 [node name="DayNightManager" parent="GameManager" instance=ExtResource("3_hvgot")]
 
