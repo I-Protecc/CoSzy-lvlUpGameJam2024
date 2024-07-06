@@ -12,7 +12,8 @@ size = Vector2(64, 64)
 
 [node name="HostileWorker" type="Node2D"]
 script = ExtResource("1_a0d4k")
-Health = 10
+Health = 10.0
+DamageAmount = 1.0
 
 [node name="Body" type="CharacterBody2D" parent="."]
 script = ExtResource("2_mquep")

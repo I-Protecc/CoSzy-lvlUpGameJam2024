@@ -1,8 +1,6 @@
-using System;
-using GameJamPlaceHolderName.Scripts.integration;
 using Godot;
 
-namespace GameJamPlaceHolderName.Prefabs;
+namespace GameJamPlaceHolderName.Scripts.integration;
 
 public partial class UnitMovement : CharacterBody2D
 {

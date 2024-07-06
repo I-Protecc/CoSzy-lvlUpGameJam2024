@@ -21,7 +21,6 @@ shader_parameter/outlined = false
 
 [node name="Worker" type="Node2D" groups=["Workers"]]
 script = ExtResource("1_0hcoq")
-Health = 5
 
 [node name="Body" type="CharacterBody2D" parent="."]
 collision_layer = 2

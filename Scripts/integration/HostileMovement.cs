@@ -26,6 +26,8 @@ public partial class HostileMovement : CharacterBody2D
 		
 		_navigationAgent.PathDesiredDistance = 4.0f;
 		_navigationAgent.TargetDesiredDistance = 2.0f;
+		
+		Callable.From(ActorSetup).CallDeferred();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -46,6 +48,13 @@ public partial class HostileMovement : CharacterBody2D
 	public void MoveToCore()
 	{
 		MovementTarget = GameManager.Instance.CorePosition;
+	}
+	
+	private async void ActorSetup()
+	{
+		// Wait for the first physics frame so the NavigationServer can sync.
+		await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+		//MovementTarget = _movementTargetPosition;
 	}
 	
 }

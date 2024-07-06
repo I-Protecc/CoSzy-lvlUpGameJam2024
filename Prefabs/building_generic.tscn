@@ -9,7 +9,6 @@ size = Vector2(64, 64)
 
 [node name="BuildingGeneric" type="Node2D"]
 script = ExtResource("1_do3kk")
-Health = 50
 
 [node name="Body" type="StaticBody2D" parent="."]
 
