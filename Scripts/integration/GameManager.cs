@@ -27,6 +27,8 @@ public partial class GameManager : Node
     
     public int DaysPassed;
 
+    public Vector2 CorePosition;
+
     public override void _Ready()
     {
         Instance ??= this;
@@ -83,6 +85,7 @@ public partial class GameManager : Node
         CycleIncome();
         GD.Print("stonks " + Money);
         GD.Print("currentlyWorkingFarms " + CurrentlyWorkingFarms);
+        
     }
 
     private int _changeMoney(int moneyChange)

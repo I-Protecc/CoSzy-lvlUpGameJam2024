@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://4wwb2h6ir8kt" path="res://Prefabs/day_night_manager.tscn" id="3_hvgot"]
 [ext_resource type="Texture2D" uid="uid://b1h8d4uwkv6gn" path="res://Sprites/Tilemap/tempSet.png" id="4_3dn04"]
 [ext_resource type="PackedScene" uid="uid://niaarae6fuq" path="res://Prefabs/building_generic.tscn" id="4_in45m"]
+
 [ext_resource type="Script" path="res://Scripts/integration/MapManager.cs" id="6_fo36y"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
@@ -86,3 +87,6 @@ position = Vector2(166, 21)
 
 [node name="BuildingGeneric2" parent="." instance=ExtResource("4_in45m")]
 position = Vector2(-437, 23)
+
+[node name="HostileWorker" parent="." instance=ExtResource("5_jgukt")]
+position = Vector2(-512, 23)

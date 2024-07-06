@@ -7,7 +7,7 @@ namespace GameJamPlaceHolderName.Scripts.integration;
 public partial class WorkerAuthoring : Node2D
 {
     [Export]
-    public int Health;
+    public float Health;
     
     public bool MouseInside = false;
     public bool Selected = false;
@@ -75,5 +75,10 @@ public partial class WorkerAuthoring : Node2D
         {
             Show();
         }
+    }
+
+    public void NewCycleHeal()
+    {
+        Worker.FullHeal();
     }
 }
