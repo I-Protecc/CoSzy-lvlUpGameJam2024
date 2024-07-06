@@ -42,7 +42,10 @@ public partial class GameManager : Node
     public void AddToInventory(string itemType, int amount)
     {
         if (_inventory.ContainsKey(itemType))
+        {
             _inventory[itemType] += amount;
+            GD.Print("Added " + amount + itemType + " to inventory");
+        }
         else
             _inventory.Add(itemType, amount);
     }

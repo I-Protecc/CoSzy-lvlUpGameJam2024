@@ -31,7 +31,10 @@ public partial class MapManager : TileMap
         if(_tileHealth[tilePos] <= 0)
         {
             SetCell(0, tilePos, -1);
-            GD.Print(GetCellAtlasCoords(0, tilePos));
+
+            Random itemChance = new Random();
+            if(itemChance.NextInt64(5) <= 2)
+                GameManager.Instance.AddToInventory("Iron", (int)itemChance.NextInt64(3));
             
             GD.Print("Mined - " + _tileHealth[tilePos]);
         }    
