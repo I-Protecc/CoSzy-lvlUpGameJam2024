@@ -31,10 +31,6 @@ public partial class HostileAuthoring : Node2D
 		_hostileWorker = GetNode<CharacterBody2D>("Body");
 		_area2D = GetNode<Area2D>("Body/Area2D");
 		_timer = GetNode<Timer>("Timer");
-
-		_timer.Timeout += OnTimerTimeout;
-		_area2D.AreaEntered += _OnAreaEntered;
-		_area2D.AreaExited += _OnAreaExited;
 		
 		if (HostileMovement != null) HostileMovement.MoveToCore();
 	}
@@ -50,26 +46,8 @@ public partial class HostileAuthoring : Node2D
 		Hostile.Damage(damage);
 	}
 
-	private void _OnAreaEntered(Area2D area)
+	public float GetDamageAmount()
 	{
-		if (area is not null  && area.GetParent().GetParent() is Node2D )
-		{
-			 _attackedTarget= area.GetParent().GetParent<Node2D>();
-
-			_timer.Start();
-		}
-	}
-
-	private void _OnAreaExited(Area2D area)
-	{
-		if (area == _attackedTarget)
-		{
-			_timer.Stop();
-		}
-	}
-
-	private void OnTimerTimeout()
-	{
-		if (_attackedTarget.HasMethod("Damage")) _attackedTarget.Call("Damage", DamageAmount );
+		return DamageAmount;
 	}
 }
