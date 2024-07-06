@@ -30,7 +30,7 @@ public partial class MapManager : TileMap
         
         if(_tileHealth[tilePos] <= 0)
         {
-            SetCell(0, tilePos, -1);
+            SetCell(0, tilePos, 1, new Vector2I(0, 0));
 
             Random itemChance = new Random();
             if(itemChance.NextInt64(5) <= 2)

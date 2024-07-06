@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://uahb53qeyxcg"]
+[gd_scene load_steps=14 format=3 uid="uid://uahb53qeyxcg"]
 
 [ext_resource type="PackedScene" uid="uid://dy5wkumqo4i13" path="res://Prefabs/core.tscn" id="1_wsq8x"]
 [ext_resource type="PackedScene" uid="uid://iu2ejwdji6q2" path="res://Prefabs/worker.tscn" id="2_mjj12"]
 [ext_resource type="PackedScene" uid="uid://4wwb2h6ir8kt" path="res://Prefabs/day_night_manager.tscn" id="3_hvgot"]
 [ext_resource type="Texture2D" uid="uid://b1h8d4uwkv6gn" path="res://Sprites/Tilemap/tempSet.png" id="4_3dn04"]
+
+[ext_resource type="Texture2D" uid="uid://12diej4tlf2g" path="res://Sprites/Tilemap/mined.png" id="5_mcwka"]
 
 [ext_resource type="PackedScene" uid="uid://niaarae6fuq" path="res://Prefabs/building_generic.tscn" id="4_in45m"]
 
@@ -32,6 +34,12 @@ texture = ExtResource("4_3dn04")
 1:0/0/custom_data_0 = 2
 1:0/0/custom_data_1 = "Grass"
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4k3v6"]
+texture = ExtResource("5_mcwka")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSet" id="TileSet_3xrll"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
@@ -40,6 +48,7 @@ custom_data_layer_0/type = 2
 custom_data_layer_1/name = "Type"
 custom_data_layer_1/type = 4
 sources/0 = SubResource("TileSetAtlasSource_pe56r")
+sources/1 = SubResource("TileSetAtlasSource_4k3v6")
 
 [node name="MainScene" type="Node2D"]
 
