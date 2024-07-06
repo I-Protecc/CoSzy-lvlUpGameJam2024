@@ -26,6 +26,11 @@ public partial class GameManager : Node
     public int MineProductionEfficiency;
     
     public int DaysPassed;
+    public bool StartOfNewDay;
+
+    public Vector2 HostileSpawnLocation = new Vector2(-550f, 50f);
+
+    private PackedScene _HostileWorkerScene = GD.Load<PackedScene>("res://Prefabs/hostile_worker.tscn");
 
     public Vector2 CorePosition;
 
@@ -82,6 +87,7 @@ public partial class GameManager : Node
 
     public void NewCycle()
     {
+        StartOfNewDay = true;
         CycleIncome();
         GD.Print("stonks " + Money);
         GD.Print("currentlyWorkingFarms " + CurrentlyWorkingFarms);
@@ -139,4 +145,31 @@ public partial class GameManager : Node
     {
         return _changeCurrentlyWorkingMines(-amountThatStoppedWorking);
     }
+
+    private int _enemiesSpawned;
+    public void StartAttackWave()
+    {
+        if (StartOfNewDay) StartOfNewDay = false;
+        for(int i = 0; i <= DaysPassed; i++)
+        {
+            _enemiesSpawned++;
+            SpawnEnemy();
+            GD.Print("enemy spawned");
+        }
+        GD.Print("_enemiesSpawned "+ _enemiesSpawned);
+    }
+
+
+    private void SpawnEnemy()
+    {
+        Node2D instance = _HostileWorkerScene.Instantiate() as Node2D;
+
+        if (instance != null)
+        {
+            instance.GlobalPosition = HostileSpawnLocation;
+
+            AddSibling(instance);
+        }
+    }
+
 }
