@@ -43,4 +43,9 @@ public partial class HostileMovement : CharacterBody2D
 		MoveAndSlide();
 	}
 	
+	public void MoveToCore()
+	{
+		MovementTarget = GameManager.Instance.CorePosition;
+	}
+	
 }

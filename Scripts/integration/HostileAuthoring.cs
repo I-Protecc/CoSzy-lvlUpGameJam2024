@@ -25,7 +25,7 @@ public partial class HostileAuthoring : Node2D
 		_hostileWorker = GetNode<CharacterBody2D>("Body");
 		_area2D = GetNode<Area2D>("Body/Area2D");
 		_area2D.AreaEntered += _OnAreaEntered;
-		_moveToCore();
+		if (HostileMovement != null) HostileMovement.MoveToCore();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,14 +43,11 @@ public partial class HostileAuthoring : Node2D
 	{
 		if (area is not null  && area.GetParent().GetParent() is Node2D )
 		{
-			Node2D AttackedTarget = area.GetParent().GetParent<Node2D>();
+			Node2D attackedTarget = area.GetParent().GetParent<Node2D>();
 
-			if (AttackedTarget.HasMethod("Damage")) AttackedTarget.Call("Damage");
+			if (attackedTarget.HasMethod("Damage")) attackedTarget.Call("Damage");
 		}
 	}
 
-	private void _moveToCore()
-	{
-		HostileMovement.MovementTarget = GameManager.Instance.CorePosition;
-	}
+	
 }
