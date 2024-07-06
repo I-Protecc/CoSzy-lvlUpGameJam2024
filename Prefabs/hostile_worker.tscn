@@ -12,6 +12,7 @@ size = Vector2(64, 64)
 
 [node name="HostileWorker" type="Node2D"]
 script = ExtResource("1_a0d4k")
+Health = 10
 
 [node name="Body" type="CharacterBody2D" parent="."]
 script = ExtResource("2_mquep")
@@ -31,4 +32,9 @@ texture = ExtResource("3_axmgi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Area2D"]
 shape = SubResource("RectangleShape2D_n7btq")
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Body/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Body/Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

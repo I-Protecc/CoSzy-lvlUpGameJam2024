@@ -16,7 +16,7 @@ public enum WorkType
 public partial class BuildingAuthoring : Node2D
 {
 	[Export]
-	public int Health;
+	public float Health;
 
 	[Export] public WorkType WorkType = WorkType.Farm;
 

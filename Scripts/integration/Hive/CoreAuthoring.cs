@@ -6,7 +6,7 @@ namespace GameJamPlaceHolderName.Scripts.integration.Hive;
 public partial class CoreAuthoring : Node2D
 {
 	[Export]
-	public int Health;
+	public float Health;
 
 	public Core Core { get; private set; }
 	

@@ -8,7 +8,7 @@ namespace GameJamPlaceHolderName.Scripts.integration;
 public partial class WorkerAuthoring : Node2D
 {
     [Export]
-    public int Health;
+    public float Health;
     
     public bool MouseInside = false;
     public bool Selected = false;
