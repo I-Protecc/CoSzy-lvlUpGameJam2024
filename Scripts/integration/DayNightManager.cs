@@ -80,6 +80,7 @@ public partial class DayNightManager : Node
                 _dayTimeEnum = DayTime.Night;
                 _t = 0f;
                 _timer.Start();
+                GameManager.Instance.StartAttackWave();
                 GD.Print("Switching from dusk to night");
                 
                 break;
