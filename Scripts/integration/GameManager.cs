@@ -1,6 +1,8 @@
-using Godot;
 using System;
+using Godot;
 using Godot.Collections;
+
+namespace GameJamPlaceHolderName.Scripts.integration;
 
 public partial class GameManager : Node
 {
@@ -12,6 +14,7 @@ public partial class GameManager : Node
     public static GameManager Instance;
 
     public int Money;
+    private Dictionary<String, int> _inventory = new Dictionary<string, int>();
 
     public int IncomeMultiplier = 1;
     public int PassiveIncome = 0;
@@ -49,6 +52,32 @@ public partial class GameManager : Node
         hasWorkerSelected = false;
         GD.Print("UNSELECTED");
     }
+    
+    public void AddToInventory(string itemType, int amount)
+    {
+        if (_inventory.ContainsKey(itemType))
+        {
+            _inventory[itemType] += amount;
+            GD.Print("Added " + amount + itemType + " to inventory");
+        }
+        else
+            _inventory.Add(itemType, amount);
+    }
+
+    public void RemoveFromInventory(string itemType, int amount)
+    {
+        if (_inventory.ContainsKey(itemType))
+        {
+            _inventory[itemType] -= amount;
+            _inventory[itemType] = Mathf.Clamp(_inventory[itemType], 0, 9999);
+        }
+    }
+
+    public int GetAmountInInventory(string itemType)
+    {
+        return _inventory[itemType];
+    }
+}
 
     public void NewCycle()
     {
