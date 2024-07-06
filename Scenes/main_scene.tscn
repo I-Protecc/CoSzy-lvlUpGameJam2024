@@ -11,9 +11,9 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j2w1w"]
-vertices = PackedVector2Array(1034, 631, -708, 636, -658, -176, 1050, -179)
+vertices = PackedVector2Array(1034, 631, -708, 636, -671, 9, 1040, 7)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-668, -186, 1061, -190, 1044, 641, -719, 647)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-681, 0, 1051, -3, 1044, 641, -719, 647)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pe56r"]
@@ -32,8 +32,8 @@ texture = ExtResource("4_3dn04")
 1:0/0/custom_data_1 = "Grass"
 
 [sub_resource type="TileSet" id="TileSet_3xrll"]
-physics_layer_0/collision_layer = 4
-physics_layer_0/collision_mask = 2
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 15
 custom_data_layer_0/name = "Hits"
 custom_data_layer_0/type = 2
 custom_data_layer_1/name = "Type"

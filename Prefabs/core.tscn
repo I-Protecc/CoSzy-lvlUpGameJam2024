@@ -16,6 +16,7 @@ script = ExtResource("1_2rtqf")
 Health = 100.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_fwkru")
