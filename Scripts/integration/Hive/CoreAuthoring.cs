@@ -14,6 +14,7 @@ public partial class CoreAuthoring : Node2D
 	public override void _Ready()
 	{
 		Core = new Core(Health);
+		GameManager.Instance.CorePosition = GlobalPosition;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
