@@ -5,7 +5,9 @@ namespace GameJamPlaceHolderName.Scripts.integration;
 public partial class UnitMovement : CharacterBody2D
 {
 	private NavigationAgent2D _navigationAgent;
+	
 	private RayCast2D _directionRay;
+	private bool _rayColliding;
 
 	private float _movementSpeed = 200.0f;
 
@@ -50,10 +52,23 @@ public partial class UnitMovement : CharacterBody2D
 
 		Vector2 direction = currentAgentPosition.DirectionTo(nextPathPosition);
 
-		_directionRay.TargetPosition = direction / direction.Length() * 50; 
+		_directionRay.TargetPosition = direction / direction.Length() * 80; 
 
 		Velocity = direction * _movementSpeed;
 		MoveAndSlide();
+
+		if (!_directionRay.IsColliding()) return;
+		
+		_rayColliding = true;
+		var collider = _directionRay.GetCollider();
+			
+		if (collider is not TileMap map) return;
+			
+		MapManager manager = map as MapManager;
+		Vector2 hitPoint = map.ToLocal(_directionRay.GetCollisionPoint());
+		Vector2I tilePos = map.LocalToMap(hitPoint);
+
+		manager?.MineTile(tilePos);
 	}
 
 	private async void ActorSetup()

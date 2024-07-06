@@ -25,6 +25,8 @@ public partial class MapManager : TileMap
         {
             _tileHealth[tilePos] -= 1;
         }
+        else
+            return;
         
         if(_tileHealth[tilePos] <= 0)
             this.SetCell(0, tilePos);
