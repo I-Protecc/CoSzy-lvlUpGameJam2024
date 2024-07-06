@@ -48,6 +48,12 @@ public partial class BuildingAuthoring : Node2D
 			_area2D = GetNode<Area2D>("Body/Area2D"); 
 			_buildingSprite = GetNode<Sprite2D>("Body/WallPlaceHolder");
 		}
+		else if (this.WorkType is WorkType.DefenseTower)
+		{
+			_area2D = GetNode<Area2D>("AttackArea");
+			_buildingSprite = GetNode<Sprite2D>("TowerPlaceHolder");
+			 
+		}
 		
 	} 
 
@@ -56,16 +62,12 @@ public partial class BuildingAuthoring : Node2D
 	{
 		if(Building.IsDestroyed) QueueFree();
 		
-		if(this.WorkType != WorkType.Wall){
+		if(this.WorkType != WorkType.Wall && this.WorkType != WorkType.DefenseTower)
+		{
 			if (_mouseChecker.Interacted && WorkType is not WorkType.DefenseTower && WorkType is not WorkType.Wall)
 			{
 				_mouseChecker.Interacted = false;
 				WorkerInteract();
-			}
-			else if(_mouseChecker.Interacted && WorkType is WorkType.DefenseTower)
-			{
-				_mouseChecker.Interacted = false;
-				// EmployWarrior();
 			}
 		}
 	}
