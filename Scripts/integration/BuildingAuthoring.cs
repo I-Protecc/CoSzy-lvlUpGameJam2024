@@ -18,7 +18,10 @@ public partial class BuildingAuthoring : Node2D
 	[Export]
 	public float Health;
 
-	[Export] public WorkType WorkType = WorkType.Farm;
+	[Export] 
+	public WorkType WorkType = WorkType.Farm;
+
+	public bool MayBePlaced = false;
 
 	private bool _isWorking;
 	
@@ -34,11 +37,14 @@ public partial class BuildingAuthoring : Node2D
 	public override void _Ready()
 	{
 		Building = new Building(Health);
+		
 		_building = GetNode<StaticBody2D>("Body");
 		_buildingSprite = GetNode<Sprite2D>("Body/BuildingPlaceHolder");
 		_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
 		_area2D = GetNode<Area2D>("Body/Area2D");
+		
 		_area2D.AreaEntered += _OnAreaEntered;
+		_area2D.AreaExited += _OnAreaExited;
 	} 
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -82,7 +88,10 @@ public partial class BuildingAuthoring : Node2D
 		}
 	}
 	private void _OnAreaEntered(Area2D area)
-    {
+	{
+		MayBePlaced = false;
+		GD.Print("Area Entered");
+	    
 	    if (!_isWorking && GameManager.Instance.SelectedBuilding == this)
 	    {
 		    GD.Print("Area was entered");
@@ -99,6 +108,12 @@ public partial class BuildingAuthoring : Node2D
 	    }
     }
 
+	private void _OnAreaExited(Area2D area)
+	{
+		MayBePlaced = true;
+		GD.Print("Area exited");
+	}
+	
 	private void WorkerInteract()
 	{
 		if (GameManager.Instance.GetSelectedWorker() is not null  && !_isWorking && GameManager.Instance.hasWorkerSelected)

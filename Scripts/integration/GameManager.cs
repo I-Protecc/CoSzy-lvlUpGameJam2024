@@ -13,6 +13,7 @@ public partial class GameManager : Node2D
 
     public Node2D SelectedBuilding;
     private Node2D _buildingBuilding;
+    private BuildingAuthoring _buildingAuthoring;
     
     public static GameManager Instance;
 
@@ -182,7 +183,10 @@ public partial class GameManager : Node2D
         {
             IsPlacingBuilding = true;
             Node2D instance = (Node2D)_buildingScene.Instantiate();
+            
             _buildingBuilding = instance;
+            _buildingAuthoring = _buildingBuilding as BuildingAuthoring;
+            
             AddChild(instance);
         }
 
@@ -210,11 +214,13 @@ public partial class GameManager : Node2D
         buildingSprite2D.Modulate = new Color(1, 1, 1, 0.2f);
         _buildingBuilding.GlobalPosition = GetGlobalMousePosition();
 
-        if (_placeClicked)
+        if (_placeClicked && _buildingAuthoring.MayBePlaced)
         {
             IsPlacingBuilding = false;
             _placeClicked = false;
             buildingSprite2D.Modulate = new Color(1, 1, 1);
         }
+
+        _placeClicked = false;
     }
 }
