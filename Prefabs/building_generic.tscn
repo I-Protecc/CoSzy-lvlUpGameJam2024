@@ -34,7 +34,7 @@ shape = SubResource("RectangleShape2D_x5cud")
 [node name="Area2D" parent="Body" instance=ExtResource("2_hbf2l")]
 position = Vector2(163, -23)
 collision_layer = 2
-collision_mask = 2
+collision_mask = 770
 
 [node name="BuildingPlaceHolder" type="Sprite2D" parent="Body"]
 material = SubResource("ShaderMaterial_hwq7q")

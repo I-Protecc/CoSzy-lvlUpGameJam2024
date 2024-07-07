@@ -48,6 +48,7 @@ public partial class HostileAuthoring : Node2D
 	public void Damage(float damage)
 	{
 		Hostile.Damage(damage);
+		GD.Print("da enemy getting damaged " + damage + " hp, hp left: " + Hostile.Health);
 	}
 
 	public void Kill()

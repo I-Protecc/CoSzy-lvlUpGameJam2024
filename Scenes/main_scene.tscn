@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://vy26jqebhdao" path="res://Prefabs/building_generic.tscn" id="4_in45m"]
 [ext_resource type="Texture2D" uid="uid://12diej4tlf2g" path="res://Sprites/Tilemap/mined.png" id="5_mcwka"]
 [ext_resource type="Script" path="res://Scripts/integration/MapManager.cs" id="6_fo36y"]
-[ext_resource type="PackedScene" path="res://Prefabs/wall.tscn" id="8_0ma48"]
+[ext_resource type="PackedScene" uid="uid://cjbv4jvk50gnh" path="res://Prefabs/wall.tscn" id="8_0ma48"]
 [ext_resource type="PackedScene" uid="uid://dldkwv8mtf5qh" path="res://Prefabs/tower.tscn" id="9_8cd0m"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
@@ -102,6 +102,7 @@ position = Vector2(353, 24)
 
 [node name="Wall" parent="." instance=ExtResource("8_0ma48")]
 position = Vector2(-416, 23)
+Health = 3.0
 
 [node name="Tower" parent="." instance=ExtResource("9_8cd0m")]
 position = Vector2(-287, 22)

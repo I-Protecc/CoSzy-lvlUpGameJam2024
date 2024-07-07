@@ -10,7 +10,37 @@ public partial class UnitAttack : Area2D
     private Timer _timer;
     private Node2D _attackedTarget;
 
+    [Export]
     private float _damageAmount;
+
+    public override void _Process(double delta)
+    {
+        var overlappingAreas = _area2D.GetOverlappingAreas();
+
+        if (overlappingAreas.Count == 0)
+        {
+            _timer.Stop();
+            return;
+        }
+        
+        Area2D firstArea = overlappingAreas[0];
+        
+        if (firstArea.GetParent().GetParent() is Node2D)
+        {
+            GD.Print("target accepted");
+            _attackedTarget= firstArea.GetParent().GetParent<Node2D>();
+            if (HasMethod("GetDamageAmount"))
+            {
+                _damageAmount = (float)_attackedTarget.Call("GetDamageAmount");
+            }
+            
+            if(_timer.TimeLeft == 0)
+            {
+                _timer.Start();
+                GD.Print("timer started");
+            }
+        }
+    }
 
     public override void _Ready()
     {
@@ -18,37 +48,10 @@ public partial class UnitAttack : Area2D
         _timer = GetNode<Timer>("Timer");
 
         _timer.Timeout += OnTimerTimeout;
-        _area2D.AreaEntered += _OnAreaEntered;
-        _area2D.AreaExited += _OnAreaExited;
         
         _timer.WaitTime = WaitTime;
     }
     
-    private void _OnAreaEntered(Area2D area)
-    {
-        GD.Print("attack area entered");
-        if (area is not null && area.GetParent().GetParent() is Node2D )
-        {
-            GD.Print("target accepted");
-            _attackedTarget= area.GetParent().GetParent<Node2D>();
-            if (HasMethod("GetDamageAmount"))
-            {
-                GD.Print("Trying to get damage amount");
-                _damageAmount = (float)_attackedTarget.Call("GetDamageAmount");
-            }
-            _timer.Start();
-            GD.Print("timer started");
-        }
-    }
-
-    private void _OnAreaExited(Area2D area)
-    {
-        if (area == _attackedTarget)
-        {
-            GD.Print("Stopping Timer");
-            _timer.Stop();
-        }
-    }
 
     private void OnTimerTimeout()
     {
@@ -58,5 +61,10 @@ public partial class UnitAttack : Area2D
             GD.Print("damage method called");
         };
         GD.Print("tried dealing damage");
+    }
+
+    public float GetDamageAmount()
+    {
+        return _damageAmount;
     }
 }

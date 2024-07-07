@@ -21,6 +21,8 @@ public partial class BuildingAuthoring : Node2D
 	[Export] 
 	public WorkType WorkType = WorkType.Farm;
 
+	[Export] private float _damageAmount;
+
 	public bool MayBePlaced = true;
 
 	private bool _isWorking;
@@ -95,6 +97,7 @@ public partial class BuildingAuthoring : Node2D
 	public void Damage(float damage)
 	{
 		Building.Damage(damage);
+		GD.Print("DAM OUCH, GOT " + damage + " DAMAGE, HAVE " + Building.Health + " LEFT");
 	}
 
 	public void Destroy()
@@ -219,6 +222,11 @@ public partial class BuildingAuthoring : Node2D
 	private void OnWorkerLeave()
 	{
 		if (_employedWorker is WorkerAuthoring workerAuthoring) workerAuthoring.SwitchWorkerState(true);
+	}
+
+	public float GetDamageAmount()
+	{
+		return _damageAmount;
 	}
 }
 
