@@ -18,7 +18,10 @@ public partial class BuildingAuthoring : Node2D
 	[Export]
 	public float Health;
 
-	[Export] public WorkType WorkType = WorkType.Farm;
+	[Export] 
+	public WorkType WorkType = WorkType.Farm;
+
+	public bool MayBePlaced = true;
 
 	private bool _isWorking;
 	
@@ -28,12 +31,14 @@ public partial class BuildingAuthoring : Node2D
 	private Area2D _area2D;
 
 	private Node2D _employedWorker;
+	private WorkerAuthoring _employedWorkerAuthoring;
 	
 	public Building Building { get; private set; }
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Building = new Building(Health);
+		
 		_building = GetNode<StaticBody2D>("Body");
 		
 		if (this.WorkType is WorkType.Farm or WorkType.Farm)
@@ -42,33 +47,51 @@ public partial class BuildingAuthoring : Node2D
 			_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
 			_area2D = GetNode<Area2D>("Body/Area2D"); 
 			_area2D.AreaEntered += _OnAreaEntered;
+      _area2D.AreaExited += _OnAreaExited;
 		}
 		else if (this.WorkType is WorkType.Wall)
 		{
 			_area2D = GetNode<Area2D>("Body/Area2D"); 
 			_buildingSprite = GetNode<Sprite2D>("Body/WallPlaceHolder");
+      _area2D.AreaEntered += _OnAreaEntered;
+      _area2D.AreaExited += _OnAreaExited;
 		}
 		else if (this.WorkType is WorkType.DefenseTower)
 		{
 			_area2D = GetNode<Area2D>("AttackArea");
 			_buildingSprite = GetNode<Sprite2D>("TowerPlaceHolder");
-			 
+			_area2D.AreaEntered += _OnAreaEntered;
+      _area2D.AreaExited += _OnAreaExited;
 		}
-		
 	} 
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(Building.IsDestroyed) QueueFree();
-		
-		if(this.WorkType != WorkType.Wall && this.WorkType != WorkType.DefenseTower)
+		if (Building.IsDestroyed)
 		{
-			if (_mouseChecker.Interacted && WorkType is not WorkType.DefenseTower && WorkType is not WorkType.Wall)
+			if (_isWorking)
 			{
-				_mouseChecker.Interacted = false;
-				WorkerInteract();
+				StopWork();
+				
+				_employedWorkerAuthoring.SwitchWorkerState(true);
+				_employedWorkerAuthoring.Kill();
+				
+				GD.Print("Worker " + _employedWorker + " got killed");
 			}
+			
+			QueueFree();
+		}
+
+		if (_mouseChecker.Interacted && WorkType is not WorkType.DefenseTower && WorkType is not WorkType.Wall)
+		{
+			_mouseChecker.Interacted = false;
+			WorkerInteract();
+		}
+		else if(_mouseChecker.Interacted && WorkType is WorkType.DefenseTower)
+		{
+			_mouseChecker.Interacted = false;
+			// EmployWarrior();
 		}
 	}
 
@@ -95,7 +118,10 @@ public partial class BuildingAuthoring : Node2D
 		}
 	}
 	private void _OnAreaEntered(Area2D area)
-    {
+	{
+		MayBePlaced = false;
+		GD.Print("Area Entered");
+	    
 	    if (!_isWorking && GameManager.Instance.SelectedBuilding == this)
 	    {
 		    GD.Print("Area was entered");
@@ -103,6 +129,7 @@ public partial class BuildingAuthoring : Node2D
 		    {
 			    if (area == _employedWorker.GetNode<Area2D>("Body/InteractionArea"))
 			    {
+				    _employedWorkerAuthoring = _employedWorker as WorkerAuthoring;
 				    StartWork();
 				    OnWorkerArrived();
 				    GameManager.Instance.UnsetSelectedWorker();
@@ -112,6 +139,12 @@ public partial class BuildingAuthoring : Node2D
 	    }
     }
 
+	private void _OnAreaExited(Area2D area)
+	{
+		MayBePlaced = true;
+		GD.Print("Area exited");
+	}
+	
 	private void WorkerInteract()
 	{
 		if (GameManager.Instance.GetSelectedWorker() is not null  && !_isWorking && GameManager.Instance.hasWorkerSelected)

@@ -16,6 +16,7 @@ public partial class WorkerAuthoring : Node2D
     private CharacterBody2D _worker;
     private Sprite2D _workerSprite;
     private Node2D _workerNode2D;
+    private CollisionShape2D _collisionShape2D;
     
     public Worker Worker { get; private set; }
 	
@@ -27,6 +28,7 @@ public partial class WorkerAuthoring : Node2D
         _workerNode2D = GetNode<Node2D>(".");
         _worker = GetNode<CharacterBody2D>("Body");
         _workerSprite = _worker.GetNode<Sprite2D>("WorkerPlaceHolder");
+        _collisionShape2D = GetNode<CollisionShape2D>("Body/CollisionShape2D");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,6 +40,11 @@ public partial class WorkerAuthoring : Node2D
     public void Damage(float damage)
     {
         Worker.Damage(damage);
+    }
+
+    public void Kill()
+    {
+        Worker.Kill();
     }
     
     public override void _Input(InputEvent @event)
@@ -67,6 +74,10 @@ public partial class WorkerAuthoring : Node2D
     {
         GD.Print("state switched to " + newState);
         SetProcess(newState);
+        //_collisionShape2D.Disabled = newState;
+        
+        _collisionShape2D.SetDeferred("Disabled", newState);
+        
         if (newState == false)
         {
             Hide();

@@ -4,12 +4,16 @@ using Godot.Collections;
 
 namespace GameJamPlaceHolderName.Scripts.integration;
 
-public partial class GameManager : Node
+public partial class GameManager : Node2D
 {
     public Node2D SelectedWorker;
     public bool hasWorkerSelected;
+    public bool IsPlacingBuilding = false;
+    private bool _placeClicked = false;
 
     public Node2D SelectedBuilding;
+    private Node2D _buildingBuilding;
+    private BuildingAuthoring _buildingAuthoring;
     
     public static GameManager Instance;
 
@@ -31,6 +35,7 @@ public partial class GameManager : Node
     public Vector2 HostileSpawnLocation = new Vector2(-550f, 50f);
 
     private PackedScene _HostileWorkerScene = GD.Load<PackedScene>("res://Prefabs/hostile_worker.tscn");
+    private PackedScene _buildingScene = GD.Load<PackedScene>("res://Prefabs/building_generic.tscn");
 
     public Vector2 CorePosition;
 
@@ -172,4 +177,63 @@ public partial class GameManager : Node
         }
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionReleased("Build"))
+        {
+            IsPlacingBuilding = true;
+            Node2D instance = (Node2D)_buildingScene.Instantiate();
+            
+            _buildingBuilding = instance;
+            _buildingAuthoring = _buildingBuilding as BuildingAuthoring;
+            
+            AddChild(instance);
+        }
+
+        if (@event.IsActionReleased("GeneralClick") && IsPlacingBuilding)
+        {
+            if (@event.IsAction("LeftClick"))
+            {
+                _placeClicked = true;
+            }
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        if (IsPlacingBuilding)
+        {
+            _placingBuilding();
+        }
+    }
+
+    private void _placingBuilding()
+    {
+        Sprite2D buildingSprite2D = _buildingBuilding.GetNode("Body").GetNode<Sprite2D>("BuildingPlaceHolder");
+        ((ShaderMaterial)buildingSprite2D.Material).SetShaderParameter("outlined", true);
+        
+        buildingSprite2D.Modulate = new Color(1, 1, 1, 0.2f);
+
+        Vector2 MousePosition = GetGlobalMousePosition();
+        _buildingBuilding.GlobalPosition = new Vector2(MousePosition.X, 23);
+
+        if (_buildingAuthoring.MayBePlaced)
+        {
+            ((ShaderMaterial)buildingSprite2D.Material).SetShaderParameter("color", new Color(0, 1, 0));
+
+            if (_placeClicked)
+            {
+                IsPlacingBuilding = false;
+                _placeClicked = false;
+                ((ShaderMaterial)buildingSprite2D.Material).SetShaderParameter("outlined", false);
+                buildingSprite2D.Modulate = new Color(1, 1, 1);
+            }
+        }
+        else
+        {
+            ((ShaderMaterial)buildingSprite2D.Material).SetShaderParameter("color", new Color(1, 0, 0));
+        }
+
+        _placeClicked = false;
+    }
 }
