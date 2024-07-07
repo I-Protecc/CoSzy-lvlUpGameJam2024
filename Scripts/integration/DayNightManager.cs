@@ -6,8 +6,8 @@ namespace GameJamPlaceHolderName.Scripts.integration;
 public partial class DayNightManager : Node
 {
     private DayTime _dayTimeEnum;
-    [Export] public int DayNightSeconds = 10;
-    [Export] public int DawnDuskSeconds = 5;
+    [Export] public int DayNightSeconds;
+    [Export] public int DawnDuskSeconds;
     
     private DirectionalLight2D _sun;
     private Timer _timer;
@@ -26,6 +26,7 @@ public partial class DayNightManager : Node
         _timer.Timeout += OnTimerTimeout;
 
         _timer.WaitTime = DayNightSeconds;
+        _timer.Start();
 
         _dayTimeEnum = DayTime.Day;
         _sun.Energy = 1f;
