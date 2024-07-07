@@ -28,6 +28,7 @@ public partial class BuildingAuthoring : Node2D
 	private Area2D _area2D;
 
 	private Node2D _employedWorker;
+	private WorkerAuthoring _employedWorkerAuthoring;
 	
 	public Building Building { get; private set; }
 	// Called when the node enters the scene tree for the first time.
@@ -44,7 +45,20 @@ public partial class BuildingAuthoring : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(Building.IsDestroyed) QueueFree();
+		if (Building.IsDestroyed)
+		{
+			if (_isWorking)
+			{
+				StopWork();
+				
+				_employedWorkerAuthoring.SwitchWorkerState(true);
+				_employedWorkerAuthoring.Kill();
+				
+				GD.Print("Worker " + _employedWorker + " got killed");
+			}
+			
+			QueueFree();
+		}
 
 		if (_mouseChecker.Interacted && WorkType is not WorkType.DefenseTower && WorkType is not WorkType.Wall)
 		{
@@ -90,6 +104,7 @@ public partial class BuildingAuthoring : Node2D
 		    {
 			    if (area == _employedWorker.GetNode<Area2D>("Body/InteractionArea"))
 			    {
+				    _employedWorkerAuthoring = _employedWorker as WorkerAuthoring;
 				    StartWork();
 				    OnWorkerArrived();
 				    GameManager.Instance.UnsetSelectedWorker();
