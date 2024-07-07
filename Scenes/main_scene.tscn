@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://uahb53qeyxcg"]
+[gd_scene load_steps=16 format=3 uid="uid://uahb53qeyxcg"]
 
 [ext_resource type="PackedScene" uid="uid://dy5wkumqo4i13" path="res://Prefabs/core.tscn" id="1_wsq8x"]
+[ext_resource type="Script" path="res://Scripts/integration/UILabel.cs" id="2_2fps6"]
 [ext_resource type="PackedScene" uid="uid://iu2ejwdji6q2" path="res://Prefabs/worker.tscn" id="2_mjj12"]
 [ext_resource type="PackedScene" uid="uid://4wwb2h6ir8kt" path="res://Prefabs/day_night_manager.tscn" id="3_hvgot"]
 [ext_resource type="Texture2D" uid="uid://b1h8d4uwkv6gn" path="res://Sprites/Tilemap/tempSet.png" id="4_3dn04"]
@@ -56,6 +57,13 @@ position = Vector2(5, 2)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 1)
+
+[node name="Label" type="Label" parent="Camera2D"]
+offset_left = -571.0
+offset_top = -317.0
+offset_right = -433.0
+offset_bottom = -284.0
+script = ExtResource("2_2fps6")
 
 [node name="Grass" type="Sprite2D" parent="."]
 visible = false

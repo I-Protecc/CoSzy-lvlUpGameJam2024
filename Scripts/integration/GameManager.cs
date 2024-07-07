@@ -42,6 +42,7 @@ public partial class GameManager : Node2D
     public override void _Ready()
     {
         Instance ??= this;
+        _inventory.Add("Iron", 0);
     }
 
     public Node2D GetSelectedWorker()
@@ -73,7 +74,7 @@ public partial class GameManager : Node2D
             GD.Print("Added " + amount + itemType + " to inventory");
         }
         else
-            _inventory.Add(itemType, amount);
+            GD.Print("Cant add " + itemType + " to Inventory");
     }
 
     public void RemoveFromInventory(string itemType, int amount)
