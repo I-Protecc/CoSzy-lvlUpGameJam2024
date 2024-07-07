@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://emswxntdd04n"]
+[gd_scene load_steps=6 format=3 uid="uid://dldkwv8mtf5qh"]
 
 [ext_resource type="Script" path="res://Scripts/integration/BuildingAuthoring.cs" id="1_r7ypr"]
 [ext_resource type="Script" path="res://Scripts/integration/UnitAttack.cs" id="2_5qj7u"]
-[ext_resource type="Texture2D" uid="uid://djtod3gl46d8h" path="res://Sprites/TowerPlaceHolder.png" id="3_e6eup"]
+[ext_resource type="Texture2D" path="res://Sprites/TowerPlaceHolder.png" id="3_e6eup"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mpo38"]
 size = Vector2(64, 64)
@@ -11,20 +11,20 @@ size = Vector2(64, 64)
 size = Vector2(641, 78)
 
 [node name="Tower" type="Node2D"]
+script = ExtResource("1_r7ypr")
+Health = 200.0
+WorkType = 3
 
 [node name="Body" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 13
-script = ExtResource("1_r7ypr")
-Health = 20.0
-WorkType = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("RectangleShape2D_mpo38")
 
 [node name="AttackArea" type="Area2D" parent="Body"]
-collision_layer = 128
-collision_mask = 8
+collision_layer = 256
+collision_mask = 136
 script = ExtResource("2_5qj7u")
 WaitTime = 2.0
 

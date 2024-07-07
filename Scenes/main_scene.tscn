@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://12diej4tlf2g" path="res://Sprites/Tilemap/mined.png" id="5_mcwka"]
 [ext_resource type="Script" path="res://Scripts/integration/MapManager.cs" id="6_fo36y"]
 [ext_resource type="PackedScene" path="res://Prefabs/wall.tscn" id="8_0ma48"]
-[ext_resource type="PackedScene" path="res://Prefabs/tower.tscn" id="9_8cd0m"]
+[ext_resource type="PackedScene" uid="uid://dldkwv8mtf5qh" path="res://Prefabs/tower.tscn" id="9_8cd0m"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
 

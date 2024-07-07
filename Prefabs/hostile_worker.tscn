@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ybx8i3lr363c"]
+[gd_scene load_steps=6 format=3 uid="uid://ces0sswyawi6"]
 
 [ext_resource type="Script" path="res://Scripts/integration/HostileAuthoring.cs" id="1_a0d4k"]
 [ext_resource type="Script" path="res://Scripts/integration/HostileMovement.cs" id="2_mquep"]

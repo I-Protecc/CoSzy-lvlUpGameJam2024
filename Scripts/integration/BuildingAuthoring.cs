@@ -40,10 +40,10 @@ public partial class BuildingAuthoring : Node2D
 		Building = new Building(Health);
 		
 		_building = GetNode<StaticBody2D>("Body");
-		_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
 
 		if (this.WorkType is WorkType.Farm or WorkType.Farm)
 		{
+			_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
 			_buildingSprite = GetNode<Sprite2D>("Body/BuildingPlaceHolder");
 			_area2D = GetNode<Area2D>("Body/Area2D"); 
 			_area2D.AreaEntered += _OnAreaEntered;
@@ -58,8 +58,8 @@ public partial class BuildingAuthoring : Node2D
 		}
 		else if (this.WorkType is WorkType.DefenseTower)
 		{
-			_area2D = GetNode<Area2D>("AttackArea");
-			_buildingSprite = GetNode<Sprite2D>("TowerPlaceHolder");
+			_area2D = GetNode<Area2D>("Body/AttackArea");
+			_buildingSprite = GetNode<Sprite2D>("Body/TowerPlaceHolder");
 			_area2D.AreaEntered += _OnAreaEntered;
 			_area2D.AreaExited += _OnAreaExited;
 		}
@@ -85,7 +85,7 @@ public partial class BuildingAuthoring : Node2D
 
 		if (WorkType is not WorkType.DefenseTower && WorkType is not WorkType.Wall)
 		{
-			if(_mouseChecker.Interacted)
+			if(!_mouseChecker.Interacted)
 				return;
 			_mouseChecker.Interacted = false;
 			WorkerInteract();
