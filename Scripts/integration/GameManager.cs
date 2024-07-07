@@ -213,7 +213,9 @@ public partial class GameManager : Node2D
         ((ShaderMaterial)buildingSprite2D.Material).SetShaderParameter("outlined", true);
         
         buildingSprite2D.Modulate = new Color(1, 1, 1, 0.2f);
-        _buildingBuilding.GlobalPosition = GetGlobalMousePosition();
+
+        Vector2 MousePosition = GetGlobalMousePosition();
+        _buildingBuilding.GlobalPosition = new Vector2(MousePosition.X, 23);
 
         if (_buildingAuthoring.MayBePlaced)
         {
