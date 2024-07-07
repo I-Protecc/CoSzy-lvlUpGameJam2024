@@ -21,7 +21,7 @@ public partial class BuildingAuthoring : Node2D
 	[Export] 
 	public WorkType WorkType = WorkType.Farm;
 
-	public bool MayBePlaced = false;
+	public bool MayBePlaced = true;
 
 	private bool _isWorking;
 	

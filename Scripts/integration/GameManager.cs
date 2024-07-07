@@ -210,15 +210,26 @@ public partial class GameManager : Node2D
     private void _placingBuilding()
     {
         Sprite2D buildingSprite2D = _buildingBuilding.GetNode("Body").GetNode<Sprite2D>("BuildingPlaceHolder");
-
+        ((ShaderMaterial)buildingSprite2D.Material).SetShaderParameter("outlined", true);
+        
         buildingSprite2D.Modulate = new Color(1, 1, 1, 0.2f);
         _buildingBuilding.GlobalPosition = GetGlobalMousePosition();
 
-        if (_placeClicked && _buildingAuthoring.MayBePlaced)
+        if (_buildingAuthoring.MayBePlaced)
         {
-            IsPlacingBuilding = false;
-            _placeClicked = false;
-            buildingSprite2D.Modulate = new Color(1, 1, 1);
+            ((ShaderMaterial)buildingSprite2D.Material).SetShaderParameter("color", new Color(0, 1, 0));
+
+            if (_placeClicked)
+            {
+                IsPlacingBuilding = false;
+                _placeClicked = false;
+                ((ShaderMaterial)buildingSprite2D.Material).SetShaderParameter("outlined", false);
+                buildingSprite2D.Modulate = new Color(1, 1, 1);
+            }
+        }
+        else
+        {
+            ((ShaderMaterial)buildingSprite2D.Material).SetShaderParameter("color", new Color(1, 0, 0));
         }
 
         _placeClicked = false;
