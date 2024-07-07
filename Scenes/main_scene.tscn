@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://uahb53qeyxcg"]
+[gd_scene load_steps=15 format=3 uid="uid://uahb53qeyxcg"]
 
 [ext_resource type="PackedScene" uid="uid://dy5wkumqo4i13" path="res://Prefabs/core.tscn" id="1_wsq8x"]
 [ext_resource type="PackedScene" uid="uid://iu2ejwdji6q2" path="res://Prefabs/worker.tscn" id="2_mjj12"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://vy26jqebhdao" path="res://Prefabs/building_generic.tscn" id="4_in45m"]
 [ext_resource type="Texture2D" uid="uid://12diej4tlf2g" path="res://Sprites/Tilemap/mined.png" id="5_mcwka"]
 [ext_resource type="Script" path="res://Scripts/integration/MapManager.cs" id="6_fo36y"]
+[ext_resource type="PackedScene" path="res://Prefabs/wall.tscn" id="8_0ma48"]
+[ext_resource type="PackedScene" path="res://Prefabs/tower.tscn" id="9_8cd0m"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_cdt8i"]
 
@@ -87,13 +89,19 @@ layer_0/tile_data = PackedInt32Array(262108, 65536, 0, 262109, 65536, 0, 262110,
 script = ExtResource("6_fo36y")
 
 [node name="BuildingGeneric" parent="." instance=ExtResource("4_in45m")]
-position = Vector2(-315, 24)
+position = Vector2(-160, 23)
 
 [node name="worker harrald" parent="." instance=ExtResource("2_mjj12")]
-position = Vector2(344, 24)
+position = Vector2(275, 23)
 
 [node name="Worker bernhart" parent="." instance=ExtResource("2_mjj12")]
-position = Vector2(166, 21)
+position = Vector2(146, 24)
 
 [node name="BuildingGeneric2" parent="." instance=ExtResource("4_in45m")]
-position = Vector2(-437, 23)
+position = Vector2(353, 24)
+
+[node name="Wall" parent="." instance=ExtResource("8_0ma48")]
+position = Vector2(-416, 23)
+
+[node name="Tower" parent="." instance=ExtResource("9_8cd0m")]
+position = Vector2(-287, 22)

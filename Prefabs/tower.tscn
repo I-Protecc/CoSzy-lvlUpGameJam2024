@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://emswxntdd04n"]
+
+[ext_resource type="Script" path="res://Scripts/integration/BuildingAuthoring.cs" id="1_r7ypr"]
+[ext_resource type="Script" path="res://Scripts/integration/UnitAttack.cs" id="2_5qj7u"]
+[ext_resource type="Texture2D" uid="uid://djtod3gl46d8h" path="res://Sprites/TowerPlaceHolder.png" id="3_e6eup"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpo38"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rk3vu"]
+size = Vector2(641, 78)
+
+[node name="Tower" type="Node2D"]
+
+[node name="Body" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("1_r7ypr")
+Health = 20.0
+WorkType = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource("RectangleShape2D_mpo38")
+
+[node name="AttackArea" type="Area2D" parent="Body"]
+collision_layer = 128
+collision_mask = 8
+script = ExtResource("2_5qj7u")
+WaitTime = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea"]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_rk3vu")
+
+[node name="Timer" type="Timer" parent="Body/AttackArea"]
+one_shot = true
+
+[node name="TowerPlaceHolder" type="Sprite2D" parent="Body"]
+texture = ExtResource("3_e6eup")
+
+[connection signal="area_entered" from="Body/AttackArea" to="Body/AttackArea" method="_on_area_entered"]
+[connection signal="area_exited" from="Body/AttackArea" to="Body/AttackArea" method="_on_area_exited"]
+[connection signal="timeout" from="Body/AttackArea/Timer" to="Body/AttackArea" method="_on_timer_timeout"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbts28h270wqm"]
+
+[ext_resource type="Script" path="res://Scripts/integration/BuildingAuthoring.cs" id="1_2e8jh"]
+[ext_resource type="Texture2D" uid="uid://rsrynlchusmf" path="res://Sprites/WallPlaceHolder.png" id="2_116wa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ncwm"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6oxs"]
+size = Vector2(64, 64)
+
+[node name="Wall" type="Node2D"]
+script = ExtResource("1_2e8jh")
+Health = 50.0
+WorkType = 2
+
+[node name="Body" type="StaticBody2D" parent="."]
+
+[node name="WallPlaceHolder" type="Sprite2D" parent="Body"]
+texture = ExtResource("2_116wa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource("RectangleShape2D_3ncwm")
+
+[node name="Area2D" type="Area2D" parent="Body"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Area2D"]
+shape = SubResource("RectangleShape2D_w6oxs")

@@ -29,7 +29,7 @@ project/assembly_name="GameJam - PlaceHolderName"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/filesystem_drawer/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

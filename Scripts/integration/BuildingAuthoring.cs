@@ -40,12 +40,29 @@ public partial class BuildingAuthoring : Node2D
 		Building = new Building(Health);
 		
 		_building = GetNode<StaticBody2D>("Body");
-		_buildingSprite = GetNode<Sprite2D>("Body/BuildingPlaceHolder");
-		_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
-		_area2D = GetNode<Area2D>("Body/Area2D");
 		
-		_area2D.AreaEntered += _OnAreaEntered;
-		_area2D.AreaExited += _OnAreaExited;
+		if (this.WorkType is WorkType.Farm or WorkType.Farm)
+		{
+			_buildingSprite = GetNode<Sprite2D>("Body/BuildingPlaceHolder");
+			_mouseChecker= GetNode<Area2D>("Body/Area2D") as MouseChecker;
+			_area2D = GetNode<Area2D>("Body/Area2D"); 
+			_area2D.AreaEntered += _OnAreaEntered;
+      _area2D.AreaExited += _OnAreaExited;
+		}
+		else if (this.WorkType is WorkType.Wall)
+		{
+			_area2D = GetNode<Area2D>("Body/Area2D"); 
+			_buildingSprite = GetNode<Sprite2D>("Body/WallPlaceHolder");
+      _area2D.AreaEntered += _OnAreaEntered;
+      _area2D.AreaExited += _OnAreaExited;
+		}
+		else if (this.WorkType is WorkType.DefenseTower)
+		{
+			_area2D = GetNode<Area2D>("AttackArea");
+			_buildingSprite = GetNode<Sprite2D>("TowerPlaceHolder");
+			_area2D.AreaEntered += _OnAreaEntered;
+      _area2D.AreaExited += _OnAreaExited;
+		}
 	} 
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -76,7 +93,6 @@ public partial class BuildingAuthoring : Node2D
 			_mouseChecker.Interacted = false;
 			// EmployWarrior();
 		}
-		
 	}
 
 	public void Damage(float damage)
@@ -161,6 +177,8 @@ public partial class BuildingAuthoring : Node2D
 			case WorkType.Mine:
 				GameManager.Instance.MineStartedWorking(1);
 				break;
+			case WorkType.Wall:
+				break;
 			default:
 				GD.Print("No WorkType (Somehow)");
 				break;
@@ -179,6 +197,8 @@ public partial class BuildingAuthoring : Node2D
 				break;
 			case WorkType.Mine:
 				GameManager.Instance.MineStoppedWorking(1);
+				break;
+			case WorkType.Wall:
 				break;
 			default:
 				GD.Print("No WorkType (Somehow)");
