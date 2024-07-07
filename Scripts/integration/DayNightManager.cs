@@ -25,6 +25,8 @@ public partial class DayNightManager : Node
         _timer = GetNode<Timer>("Timer");
         _timer.Timeout += OnTimerTimeout;
 
+        _timer.WaitTime = DayNightSeconds;
+
         _dayTimeEnum = DayTime.Day;
         _sun.Energy = 1f;
     }
