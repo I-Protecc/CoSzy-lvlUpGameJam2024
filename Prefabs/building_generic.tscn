@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://niaarae6fuq"]
+[gd_scene load_steps=5 format=3 uid="uid://vy26jqebhdao"]
 
 [ext_resource type="Script" path="res://Scripts/integration/BuildingAuthoring.cs" id="1_do3kk"]
 [ext_resource type="PackedScene" uid="uid://26s6wfd4oeua" path="res://Prefabs/Utility/MouseHoverCheck.tscn" id="2_hbf2l"]
