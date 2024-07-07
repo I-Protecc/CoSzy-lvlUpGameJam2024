@@ -9,6 +9,7 @@ public partial class GameManager : Node2D
     public Node2D SelectedWorker;
     public bool hasWorkerSelected;
     public bool IsPlacingBuilding = false;
+    private bool _placeClicked = false;
 
     public Node2D SelectedBuilding;
     private Node2D _buildingBuilding;
@@ -181,7 +182,16 @@ public partial class GameManager : Node2D
         {
             IsPlacingBuilding = true;
             Node2D instance = (Node2D)_buildingScene.Instantiate();
+            _buildingBuilding = instance;
             AddChild(instance);
+        }
+
+        if (@event.IsActionReleased("GeneralClick") && IsPlacingBuilding)
+        {
+            if (@event.IsAction("LeftClick"))
+            {
+                _placeClicked = true;
+            }
         }
     }
 
@@ -199,5 +209,12 @@ public partial class GameManager : Node2D
 
         buildingSprite2D.Modulate = new Color(255, 255, 255, 0.2f);
         _buildingBuilding.GlobalPosition = GetGlobalMousePosition();
+
+        if (_placeClicked)
+        {
+            IsPlacingBuilding = false;
+            _placeClicked = false;
+            buildingSprite2D.Modulate = new Color(255, 255, 255);
+        }
     }
 }
