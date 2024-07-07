@@ -207,14 +207,14 @@ public partial class GameManager : Node2D
     {
         Sprite2D buildingSprite2D = _buildingBuilding.GetNode("Body").GetNode<Sprite2D>("BuildingPlaceHolder");
 
-        buildingSprite2D.Modulate = new Color(255, 255, 255, 0.2f);
+        buildingSprite2D.Modulate = new Color(1, 1, 1, 0.2f);
         _buildingBuilding.GlobalPosition = GetGlobalMousePosition();
 
         if (_placeClicked)
         {
             IsPlacingBuilding = false;
             _placeClicked = false;
-            buildingSprite2D.Modulate = new Color(255, 255, 255);
+            buildingSprite2D.Modulate = new Color(1, 1, 1);
         }
     }
 }
